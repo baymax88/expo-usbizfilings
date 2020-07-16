@@ -130,12 +130,15 @@ const Screen = () => (
       </View>
     </View>
 
-    <View style={{backgroundColor: '#f5f5f5'}}>
-      <AntButton type="primary">
+    <View style={{backgroundColor: '#f5f5f5', marginLeft: wp('5%'), marginRight: wp('5%')}}>
+      <AntButton type="primary" style={{backgroundColor: '#00438b', borderColor: '#00438b', borderRadius: 10}}>
         <Text style={{fontFamily: 'Comfortaa_700Bold'}}>Get Started</Text>
       </AntButton>
     </View>
 
+    <View style={{marginTop: 20, marginBottom: 20, justifyContent: 'center', alignItems: 'center'}}>
+      <Text style={{fontSize: 10}}>Copyrights &copy; 2020. All rights reserved by USBizFilings&reg;</Text>
+    </View>
   </ScrollView>
 );
 
