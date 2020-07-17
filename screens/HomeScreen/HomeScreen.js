@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, ScrollView, ImageBackground } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, ImageBackground, StatusBar } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -38,6 +38,8 @@ const HomeScreen = ({ navigation }) => {
 
 const Screen = () => (
   <ScrollView>
+    <StatusBar barStyle="light-content" translucent backgroundColor="transparent"  />
+
     <ImageBackground source={require('../../assets/images/bg/bg-2-2.jpg')} style={styles.imageBg}>
       <View style={styles.bg}>
         <Text style={styles.title}>
