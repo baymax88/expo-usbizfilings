@@ -6,6 +6,10 @@ import { AppLoading } from 'expo';
 import * as Font from 'expo-font';
 
 import HomeScreen from './screens/HomeScreen/HomeScreen';
+import Step1Screen from './screens/OrderScreen/Step1Screen'
+import ContactScreen from './screens/ContactScreen/ContactScreen'
+import SubscriptionScreen from './screens/SubscriptionScreen/SubscriptionScreen'
+import DrawerContent from './components/DrawerContent';
 
 const Drawer = createDrawerNavigator();
 
@@ -18,7 +22,6 @@ const App = () => {
       await Font.loadAsync('antfill', require('@ant-design/icons-react-native/fonts/antfill.ttf'));
       setIsReady(true);
     }
-
     setFonts();
   });
 
@@ -27,8 +30,11 @@ const App = () => {
   }
   return (
     <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Home">
+      <Drawer.Navigator initialRouteName="Home" drawerContent={props => <DrawerContent {...props} />}>
         <Drawer.Screen name="Home" component={HomeScreen} />
+        <Drawer.Screen name="Step1" component={Step1Screen} />
+        <Drawer.Screen name="Contact" component={ContactScreen} />
+        <Drawer.Screen name="Subscription" component={SubscriptionScreen} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
