@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text, ScrollView, StyleSheet, ImageBackground, StatusBar } from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack'
 import Icon from '@expo/vector-icons/Ionicons'
-import { Title, TextInput, Caption } from 'react-native-paper'
+import { Title, TextInput, Caption, Button } from 'react-native-paper'
 import { AppLoading } from 'expo'
 import { useFonts, Comfortaa_700Bold } from '@expo-google-fonts/comfortaa';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -49,6 +49,7 @@ const Screen = () => (
     <TextInput label="Enter Name" mode="outlined" style={styles.inputField} />
     <TextInput label="Enter Email" mode="outlined" style={styles.inputField} />
     <TextInput label="Messge" mode="outlined" multiline={true} numberOfLines={5} style={styles.inputField} />
+    <Button mode="contained" style={{marginTop: 10, marginHorizontal: wp('4%')}}>Send Message</Button>
 
     <View style={{borderBottomWidth: 1, borderBottomColor: '#aaa', marginHorizontal: wp('2%'), marginVertical: 20}} />
     <View style={styles.titleContainer}>
@@ -66,15 +67,15 @@ const Screen = () => (
       Our Headquarters
     </Title>
     <View style={{marginHorizontal: wp('4%'), marginVertical: wp('4%')}}>
-      <Caption>1001 Woodward Ave.</Caption>
-      <Caption>Detroit, Michigan 48226</Caption>
-      <Caption>USA</Caption>
-      <Caption style={{marginTop: 20}}>Note: We do not provide a walk-in service</Caption>
+      <Caption style={styles.caption}>1001 Woodward Ave.</Caption>
+      <Caption style={styles.caption}>Detroit, Michigan 48226</Caption>
+      <Caption style={styles.caption}>USA</Caption>
+      <Caption style={styles.caption}>Note: We do not provide a walk-in service</Caption>
     </View>
 
     <View style={{borderBottomWidth: 1, borderBottomColor: '#aaa', marginHorizontal: wp('2%')}} />
     <View style={{marginTop: 20, marginBottom: 20, justifyContent: 'center', alignItems: 'center'}}>
-      <Text style={{fontSize: 10}}>Copyrights &copy; 2020. All rights reserved by USBizFilings&reg;</Text>
+      <Text style={{fontSize: 12}}>Copyrights &copy; 2020. All rights reserved by USBizFilings&reg;</Text>
     </View>
   </ScrollView>
 )
@@ -94,10 +95,12 @@ const styles = StyleSheet.create({
     fontFamily: 'Comfortaa_700Bold',
     textAlign: 'center',
     color: '#000',
-    fontSize: 15,
+    fontSize: 20,
   },
   caption: {
-    marginHorizontal: wp('4%')
+    marginHorizontal: wp('4%'),
+    fontSize: 16,
+    lineHeight: 24
   },
   titleContainer: {
     flex: 1,
