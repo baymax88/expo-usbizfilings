@@ -6,6 +6,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import { AppLoading } from 'expo';
 import { useFonts, Comfortaa_700Bold } from '@expo-google-fonts/comfortaa';
 import { Icon as AntIcon, Button as AntButton } from '@ant-design/react-native';
+import { Button } from 'react-native-paper'
 
 const HomeStack = createStackNavigator();
 
@@ -46,7 +47,7 @@ const Screen = () => (
           Welcome to USBizFilings&reg;, a leading Business Filing and Registration Service
         </Text>
         <AntButton style={{marginTop: 12, backgroundColor: '#f70', borderColor: '#f70', alignItems: 'center', height: 30}} type="warning">
-          <Text style={{fontFamily: 'Comfortaa_700Bold', fontSize: 16}}>Order Now</Text>
+          <Text style={{fontFamily: 'Comfortaa_700Bold', fontSize: 14}}>Order Now</Text>
         </AntButton>
       </View>
     </ImageBackground>
@@ -86,7 +87,7 @@ const Screen = () => (
             Increase Your Business Presence and Credibility
           </Text>
           <AntButton style={{marginTop: 12, backgroundColor: '#f70', borderColor: '#f70', alignItems: 'center', height: 30}} type="warning">
-            <Text style={{fontFamily: 'Comfortaa_700Bold', fontSize: 16}}>Start Now</Text>
+            <Text style={{fontFamily: 'Comfortaa_700Bold', fontSize: 14}}>Start Now</Text>
           </AntButton>
         </View>
       </ImageBackground>
@@ -95,47 +96,68 @@ const Screen = () => (
       <Text style={{textAlign: 'center', fontSize: 20, fontFamily: 'Comfortaa_700Bold', marginTop: 10, marginBottom: 10}}>We Provide Best Services For You</Text>
       <Text style={{textAlign: 'center', fontSize: 16, color: '#707070'}}>You may check a variety of services that we may help you with in order to meet your business needs</Text>
 
-      <View style={{marginTop: 20, marginBottom: 20, alignItems: 'center', flexDirection: 'row', justifyContent: 'space-around'}}>
+      <View style={{marginTop: 20, alignItems: 'center', flexDirection: 'row', justifyContent: 'space-around'}}>
         <View style={{alignItems: 'center', width: wp('50%')}}>
           <AntIcon name="edit" style={{color: '#00438b'}}></AntIcon>
-          <Text style={{fontFamily: 'Comfortaa_700Bold', fontSize: 16}}>New Business Filings</Text>
         </View>
 
         <View style={{alignItems: 'center', width: wp('50%')}}>
           <AntIcon name="rise" style={{color: '#00438b'}}></AntIcon>
-          <Text style={{fontFamily: 'Comfortaa_700Bold', fontSize: 16}}>Nonprofit Startup</Text>
+        </View>
+      </View>
+      <View style={{alignItems: 'flex-start', flexDirection: 'row', justifyContent: 'space-around'}}>
+        <View style={{alignItems: 'center', width: wp('50%')}}>
+          <Text style={{fontFamily: 'Comfortaa_700Bold', fontSize: 16, marginHorizontal: wp('2%'), textAlign: 'center'}}>New Business Filings</Text>
+        </View>
+
+        <View style={{alignItems: 'center', width: wp('50%')}}>
+          <Text style={{fontFamily: 'Comfortaa_700Bold', fontSize: 16, marginHorizontal: wp('2%'), textAlign: 'center'}}>Nonprofit Startup</Text>
         </View>
       </View>
 
-      <View style={{marginTop: 20, marginBottom: 20, alignItems: 'center', flexDirection: 'row', justifyContent: 'space-around'}}>
+      <View style={{marginTop: 20, alignItems: 'center', flexDirection: 'row', justifyContent: 'space-around'}}>
         <View style={{alignItems: 'center', width: wp('50%')}}>
           <AntIcon name="solution" style={{color: '#00438b'}}></AntIcon>
-          <Text style={{fontFamily: 'Comfortaa_700Bold', fontSize: 16}}>DBA registration</Text>
         </View>
 
         <View style={{alignItems: 'center', width: wp('50%')}}>
           <AntIcon name="trophy" style={{color: '#00438b'}}></AntIcon>
-          <Text style={{fontFamily: 'Comfortaa_700Bold', fontSize: 16}}>Trademarks & Patents</Text>
+        </View>
+      </View>
+      <View style={{alignItems: 'flex-start', flexDirection: 'row', justifyContent: 'space-around'}}>
+        <View style={{alignItems: 'center', width: wp('50%')}}>
+          <Text style={{fontFamily: 'Comfortaa_700Bold', fontSize: 16, marginHorizontal: wp('2%'), textAlign: 'center'}}>DBA registration</Text>
+        </View>
+
+        <View style={{alignItems: 'center', width: wp('50%')}}>
+          <Text style={{fontFamily: 'Comfortaa_700Bold', fontSize: 16, marginHorizontal: wp('2%'), textAlign: 'center'}}>Trademarks & Patents</Text>
         </View>
       </View>
 
-      <View style={{marginTop: 20, marginBottom: 20, alignItems: 'center', flexDirection: 'row', justifyContent: 'space-around'}}>
+      <View style={{marginTop: 20, alignItems: 'center', flexDirection: 'row', justifyContent: 'space-around'}}>
         <View style={{alignItems: 'center', width: wp('50%')}}>
           <AntIcon name="file-text" style={{color: '#00438b'}}></AntIcon>
-          <Text style={{fontFamily: 'Comfortaa_700Bold', fontSize: 16}}>Tax Return Filing</Text>
         </View>
 
         <View style={{alignItems: 'center', width: wp('50%')}}>
           <AntIcon name="file" style={{color: '#00438b'}}></AntIcon>
-          <Text style={{fontFamily: 'Comfortaa_700Bold', fontSize: 16}}>Nonprofit Tax Filings</Text>
         </View>
+      </View>
+    </View>
+    <View style={{marginBottom: 20, alignItems: 'flex-start', flexDirection: 'row', justifyContent: 'space-around'}}>
+      <View style={{alignItems: 'center', width: wp('50%')}}>
+        <Text style={{fontFamily: 'Comfortaa_700Bold', fontSize: 16, marginHorizontal: wp('4%'), textAlign: 'center'}}>Tax Return Filing</Text>
+      </View>
+
+      <View style={{alignItems: 'center', width: wp('50%')}}>
+        <Text style={{fontFamily: 'Comfortaa_700Bold', fontSize: 16, marginHorizontal: wp('4%'), textAlign: 'center'}}>Nonprofit Tax Filings</Text>
       </View>
     </View>
 
     <View style={{backgroundColor: '#f5f5f5', marginLeft: wp('5%'), marginRight: wp('5%')}}>
-      <AntButton type="primary" style={{backgroundColor: '#00438b', borderColor: '#00438b', borderRadius: 10}}>
-        <Text style={{fontFamily: 'Comfortaa_700Bold'}}>Get Started</Text>
-      </AntButton>
+      <Button mode="contained" style={{backgroundColor: '#00438b', borderColor: '#00438b', borderRadius: 10}}>
+        Get Started
+      </Button>
     </View>
 
     <View style={{marginTop: 20, marginBottom: 20, justifyContent: 'center', alignItems: 'center'}}>
