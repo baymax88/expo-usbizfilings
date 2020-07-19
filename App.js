@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { AppLoading } from 'expo';
 import * as Font from 'expo-font';
+import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper'
 
 import HomeScreen from './screens/HomeScreen/HomeScreen';
 import Step1Screen from './screens/OrderScreen/Step1Screen'
@@ -12,6 +13,14 @@ import SubscriptionScreen from './screens/SubscriptionScreen/SubscriptionScreen'
 import DrawerContent from './components/DrawerContent';
 
 const Drawer = createDrawerNavigator();
+
+const theme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: '#00438b'
+  }
+}
 
 const App = () => {
   const [isReady, setIsReady] = useState(false);
@@ -29,14 +38,16 @@ const App = () => {
     return <AppLoading />;
   }
   return (
-    <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Home" drawerContent={props => <DrawerContent {...props} />}>
-        <Drawer.Screen name="Home" component={HomeScreen} />
-        <Drawer.Screen name="Step1" component={Step1Screen} />
-        <Drawer.Screen name="Contact" component={ContactScreen} />
-        <Drawer.Screen name="Subscription" component={SubscriptionScreen} />
-      </Drawer.Navigator>
-    </NavigationContainer>
+    <PaperProvider theme={theme}>
+      <NavigationContainer>
+        <Drawer.Navigator initialRouteName="Home" drawerContent={props => <DrawerContent {...props} />}>
+          <Drawer.Screen name="Home" component={HomeScreen} />
+          <Drawer.Screen name="Step1" component={Step1Screen} />
+          <Drawer.Screen name="Contact" component={ContactScreen} />
+          <Drawer.Screen name="Subscription" component={SubscriptionScreen} />
+        </Drawer.Navigator>
+      </NavigationContainer>
+    </PaperProvider>
   );
 };
 
