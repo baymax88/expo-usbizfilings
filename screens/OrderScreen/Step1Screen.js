@@ -1,5 +1,5 @@
-import React, { useState, useContext } from 'react'
-import { View, Text, ScrollView, StyleSheet } from 'react-native'
+import React, { useState, useContext, useEffect } from 'react'
+import { View, ScrollView, StyleSheet } from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack'
 import Icon from '@expo/vector-icons/Ionicons'
 import { useFonts, Comfortaa_700Bold } from '@expo-google-fonts/comfortaa';
@@ -45,17 +45,25 @@ const Screen = ({ navigation }) => {
   const [state, setState] = useState(null)
   const [entity, setEntity] = useState(null)
   const [valid, setValid] = useState(true)
+  const [stateFee, setStateFee] = useState(0)
+
+  useEffect(() => {
+    if (state !== null && entity !== null) {
+      setStateFee(STATES.filter(item => item.no === state)[0][entity])
+    }
+  }, [state, entity])
 
   const handleSubmit = () => {
     if (state === null || entity === null) {
       setValid(false)
     } else {
-      setStep1({ state_number: state, entity_type: entity })
+      setStep1({ state_number: state, entity_type: entity, state_fee: stateFee })
+      navigation.navigate('Step2')
     }
   }
 
   return (
-    <ScrollView style={{marginHorizontal: wp('4%')}}>
+    <ScrollView style={{paddingHorizontal: wp('4%')}}>
       <View style={styles.stepTitleContainer}>
         <Title style={styles.stepTitle}>
           Step 1
@@ -107,7 +115,7 @@ const Screen = ({ navigation }) => {
 
       {/* part for submitting first step */}
       <View style={styles.buttonContainer}>
-        <Button icon="arrow-right" style={styles.nextButton} mode="contained" onPress={handleSubmit}>Next Step</Button>
+        <Button icon="arrow-right" style={styles.nextButton} mode="contained" onPress={handleSubmit}>Step 2</Button>
       </View>
     </ScrollView>
   )
@@ -116,8 +124,8 @@ const Screen = ({ navigation }) => {
 const styles = StyleSheet.create({
   selectBox: {
     marginTop: 20,
-    borderColor: '#bbb',
-    borderWidth: 2,
+    borderColor: '#00438b',
+    borderWidth: 1,
     borderRadius: 5,
   },
   placeholder: {
