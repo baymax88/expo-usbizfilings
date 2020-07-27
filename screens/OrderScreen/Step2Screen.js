@@ -125,7 +125,7 @@ const Screen = ({ navigation }) => {
 
             {/* button container */}
             <View style={styles.buttonContainer}>
-                <Button icon="arrow-left" style={styles.prevButton} mode="contained" onPress={() => navigation.goBack()}>Step 1</Button>
+                <Button icon="arrow-left" style={styles.prevButton} mode="contained" onPress={() => navigation.navigate('Step1')}>Step 1</Button>
                 <Title style={{color: '#888', fontSize: wp('4%')}}>STEP 2</Title>
                 <Button icon="arrow-right" style={styles.nextButton} mode="contained" onPress={handleSubmit}>Step 3</Button>
             </View>
