@@ -4778,6 +4778,11 @@ react-native-elements@^2.0.4:
     react-native-ratings "^7.2.0"
     react-native-status-bar-height "^2.5.0"
 
+react-native-form-select-picker@^0.0.81:
+  version "0.0.81"
+  resolved "https://registry.yarnpkg.com/react-native-form-select-picker/-/react-native-form-select-picker-0.0.81.tgz#1091dedb041332f5441c28e546343f4f729a1bb1"
+  integrity sha512-KiCFIjJQIPT2E3caR5AK8GTijnWFxCHKS1eka56xuKo8cF7b/yTfnqIPs8d1tE08/YnhwMiA0bJilKOGTvJpog==
+
 react-native-gesture-handler@~1.6.0:
   version "1.6.1"
   resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-1.6.1.tgz#678e2dce250ed66e93af409759be22cd6375dd17"

@@ -8,9 +8,12 @@ import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper'
 
 import HomeScreen from './screens/HomeScreen/HomeScreen';
 import Step1Screen from './screens/OrderScreen/Step1Screen'
+import Step2Screen from './screens/OrderScreen/Step2Screen'
+import Step3Screen from './screens/OrderScreen/Step3Screen'
 import ContactScreen from './screens/ContactScreen/ContactScreen'
 import SubscriptionScreen from './screens/SubscriptionScreen/SubscriptionScreen'
 import DrawerContent from './components/DrawerContent';
+import AppContextProvider from './contexts/AppContext';
 
 const Drawer = createDrawerNavigator();
 
@@ -38,16 +41,20 @@ const App = () => {
     return <AppLoading />;
   }
   return (
-    <PaperProvider theme={theme}>
-      <NavigationContainer>
-        <Drawer.Navigator initialRouteName="Home" drawerContent={props => <DrawerContent {...props} />}>
-          <Drawer.Screen name="Home" component={HomeScreen} />
-          <Drawer.Screen name="Step1" component={Step1Screen} />
-          <Drawer.Screen name="Contact" component={ContactScreen} />
-          <Drawer.Screen name="Subscription" component={SubscriptionScreen} />
-        </Drawer.Navigator>
-      </NavigationContainer>
-    </PaperProvider>
+    <AppContextProvider>
+      <PaperProvider theme={theme}>
+        <NavigationContainer>
+          <Drawer.Navigator initialRouteName="Home" drawerContent={props => <DrawerContent {...props} />}>
+            <Drawer.Screen name="Home" component={HomeScreen} />
+            <Drawer.Screen name="Step1" component={Step1Screen} />
+            <Drawer.Screen name="Step2" component={Step2Screen} />
+            <Drawer.Screen name="Step3" component={Step3Screen} />
+            <Drawer.Screen name="Contact" component={ContactScreen} />
+            <Drawer.Screen name="Subscription" component={SubscriptionScreen} />
+          </Drawer.Navigator>
+        </NavigationContainer>
+      </PaperProvider>
+    </AppContextProvider>
   );
 };
 
