@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { View, Text, ScrollView, StyleSheet } from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack'
 import Icon from '@expo/vector-icons/Ionicons'
@@ -6,9 +6,10 @@ import { useFonts, Comfortaa_700Bold } from '@expo-google-fonts/comfortaa';
 import { AppLoading } from 'expo'
 import SelectPicker from 'react-native-form-select-picker'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import { Title, Button } from 'react-native-paper'
+import { Title, Button, HelperText } from 'react-native-paper'
 
-import { States } from '../../assets/Consts'
+import { STATES } from '../../config/consts'
+import { AppContext } from '../../contexts/AppContext'
 
 const Step1Stack = createStackNavigator()
 
@@ -28,7 +29,7 @@ const Step1Screen = ({ navigation }) => {
       },
       headerTintColor: '#fff'
     }}>
-      <Step1Stack.Screen name="Contact" component={Screen} options={{
+      <Step1Stack.Screen name="Step1" component={Screen} options={{
         title: 'Order Process',
         headerLeft: () => (
           <Icon.Button name="ios-menu" size={25} backgroundColor="#00438b" onPress={() => navigation.openDrawer()}></Icon.Button>
@@ -39,9 +40,19 @@ const Step1Screen = ({ navigation }) => {
   )
 }
 
-const Screen = () => {
+const Screen = ({ navigation }) => {
+  const { setStep1 } = useContext(AppContext)
   const [state, setState] = useState(null)
   const [entity, setEntity] = useState(null)
+  const [valid, setValid] = useState(true)
+
+  const handleSubmit = () => {
+    if (state === null || entity === null) {
+      setValid(false)
+    } else {
+      setStep1({ state_number: state, entity_type: entity })
+    }
+  }
 
   return (
     <ScrollView style={{marginHorizontal: wp('4%')}}>
@@ -60,10 +71,13 @@ const Screen = () => {
         doneButtonText="Done"
         onSelectedStyle={styles.placeholder}
         selected={state}
-        onValueChange={(value) => setState(value)}
+        onValueChange={(value) => {
+          setState(value)
+          setValid(true)
+        }}
       >
-        {States.map((item, i) => (
-          <SelectPicker.Item label={item} value={item} key={item} />
+        {STATES.map(item => (
+          <SelectPicker.Item label={item.state} value={item.no} key={item.no} />
         ))}
       </SelectPicker>
       
@@ -76,16 +90,24 @@ const Screen = () => {
         doneButtonText="Done"
         onSelectedStyle={styles.placeholder}
         selected={entity}
-        onValueChange={(value) => setEntity(value)}
+        onValueChange={(value) => {
+          setEntity(value)
+          setValid(true)
+        }}
       >
-        <SelectPicker.Item label="INC" value="INC" />
-        <SelectPicker.Item label="LLC" value="LLC" />
-        <SelectPicker.Item label="Not-for-Profit" value="Not-for-Profit" />
+        <SelectPicker.Item label="INC" value="inc" />
+        <SelectPicker.Item label="LLC" value="llc" />
+        <SelectPicker.Item label="Not-for-Profit" value="non_profit" />
       </SelectPicker>
+
+      {/* valid checking message */}
+      <HelperText type="error" visible={!valid} style={{marginTop: 20}}>
+        You must select a state and an entity.
+      </HelperText>
 
       {/* part for submitting first step */}
       <View style={styles.buttonContainer}>
-        <Button icon="arrow-right" style={styles.nextButton} mode="contained">Next Step</Button>
+        <Button icon="arrow-right" style={styles.nextButton} mode="contained" onPress={handleSubmit}>Next Step</Button>
       </View>
     </ScrollView>
   )
