@@ -14,6 +14,12 @@ export const OrderReducer = (state, action) => {
                 package_price: action.data.package_price,
                 enabled_services: action.data.enabled_services
             }
+        case 'SET_STEP3':
+            return {
+                ...state,
+                contact_info: action.data.contact_info,
+                company_info: action.data.company_info
+            }
         default:
             return state
     }
