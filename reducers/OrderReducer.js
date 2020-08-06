@@ -10,7 +10,7 @@ export const OrderReducer = (state, action) => {
         case 'SET_STEP2':
             return {
                 ...state,
-                package: action.data.package,
+                package_name: action.data.package_name,
                 package_price: action.data.package_price,
                 enabled_services: action.data.enabled_services
             }

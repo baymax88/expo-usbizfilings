@@ -10,6 +10,7 @@ import HomeScreen from './screens/HomeScreen/HomeScreen';
 import Step1Screen from './screens/OrderScreen/Step1Screen'
 import Step2Screen from './screens/OrderScreen/Step2Screen'
 import Step3Screen from './screens/OrderScreen/Step3Screen'
+import Step4Screen from './screens/OrderScreen/Step4Screen'
 import ContactScreen from './screens/ContactScreen/ContactScreen'
 import SubscriptionScreen from './screens/SubscriptionScreen/SubscriptionScreen'
 import DrawerContent from './components/DrawerContent';
@@ -49,6 +50,7 @@ const App = () => {
             <Drawer.Screen name="Step1" component={Step1Screen} />
             <Drawer.Screen name="Step2" component={Step2Screen} />
             <Drawer.Screen name="Step3" component={Step3Screen} />
+            <Drawer.Screen name="Step4" component={Step4Screen} />
             <Drawer.Screen name="Contact" component={ContactScreen} />
             <Drawer.Screen name="Subscription" component={SubscriptionScreen} />
           </Drawer.Navigator>
