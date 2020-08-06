@@ -11,7 +11,7 @@ const AppContextProvider = (props) => {
         add_on_service: 0,
         state_fee: 0,
         registered_agent: 0,
-        package: 'standard',
+        package_name: 'standard',
         enabled_services: [],
         contact_info: {
             first_name: '',
