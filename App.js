@@ -12,7 +12,7 @@ import Step2Screen from './screens/OrderScreen/Step2Screen'
 import Step3Screen from './screens/OrderScreen/Step3Screen'
 import Step4Screen from './screens/OrderScreen/Step4Screen'
 import Step5Screen from './screens/OrderScreen/Step5Screen'
-import TOSScreen from './screens/TOSScreen/TOS'
+import TOSScreen from './screens/TOSScreen/TOSScreen'
 import ContactScreen from './screens/ContactScreen/ContactScreen'
 import SubscriptionScreen from './screens/SubscriptionScreen/SubscriptionScreen'
 import DrawerContent from './components/DrawerContent';
