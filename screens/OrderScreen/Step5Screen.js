@@ -48,7 +48,8 @@ const Screen = () => {
         package_name,
         enabled_services,
         contact_info,
-        company_info
+        company_info,
+        paypal_email
     } = orderData
     const { state } = STATES.filter(item => item.no === state_number)[0]
 
@@ -65,6 +66,27 @@ const Screen = () => {
     const addOnServicePrice = calAddOnServicePrice(services)
 
     const totalPrice = (company_info.registered_agent) ? (package_price + state_fee + addOnServicePrice + 85) : (package_price + state_fee + addOnServicePrice)
+
+    const handleSubmit = () => {
+        let data = {
+            cmd: '_xclick',
+            business: paypal_email,
+            item_name: 'usbizfilings',
+            amount: totalPrice,
+            currency_code: 'USD',
+            return: 'https://usbizfilings.com',
+            cancel_return: 'https://usbizfilings.com',
+            notify_url: 'https://usbizfilings.com/data/notify.php',
+            first_name: contact_info.first_name,
+            last_name: contact_info.last_name,
+            on0: 'Name',
+            os0: contact_info.first_name + ' ' + contact_info.last_name,
+            on1: 'Entity, Package',
+            os1: entity_type + ', ' + package_name
+        }
+        let url = 'https://www.paypal.com/cgi-bin/webscr'
+
+    }
 
     return (
         <ScrollView>
@@ -143,6 +165,7 @@ const Screen = () => {
                 style={{width: wp('30%'), alignSelf: 'center', marginVertical: 20, borderRadius: 20, backgroundColor: '#ffc439'}}
                 uppercase={false}
                 labelStyle={{color: '#000', fontSize: wp('4%')}}
+                onPress={handleSubmit}
             >
                 Pay Now
             </Button>
