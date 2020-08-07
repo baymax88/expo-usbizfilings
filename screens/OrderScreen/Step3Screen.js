@@ -314,10 +314,13 @@ const Screen = ({ navigation }) => {
                     }}
                 />
                 <HelperText type="error" visible={errEmail}>You must enter valid Email.</HelperText>
-                <View style={{alignItems: 'center'}}>
-                    <View style={{flexDirection: 'row', marginVertical: 5, width: wp('90%'), justifyContent: 'center'}}>
-                        <Checkbox status={contactInfo.email_primary_communication ? 'checked' : 'unchecked'} color="#f70" onPress={() => setContactInfo({...contactInfo, email_primary_communication: !contactInfo.email_primary_communication})} />
-                        <Caption style={{fontSize: wp('4%'), marginLeft: wp('5%')}}>Use email as primary means of communication.</Caption>
+                <View style={{alignItems: 'center', justifyContent: 'center'}}>
+                    <View style={{flexDirection: 'row', marginVertical: 5, justifyContent: 'center', marginHorizontal: wp('5%')}}>
+                        <Checkbox status={contactInfo.email_primary_communication ? 'checked' : 'unchecked'} color="#f70" onPress={() => setContactInfo({
+                            ...contactInfo,
+                            email_primary_communication: !contactInfo.email_primary_communication
+                            })} style={{flex: 1}} />
+                        <Caption style={{fontSize: wp('4%'), flex: 5, textAlign: 'center'}}>Use email as primary means of communication.</Caption>
                     </View>
                 </View>
             </View>
@@ -498,19 +501,19 @@ const Screen = ({ navigation }) => {
                 </View>
                 <View style={{alignItems: 'center'}}>
                     <Title>Registered Agent</Title>
-                    <View style={{flexDirection: 'row', marginVertical: 5, width: wp('90%'), justifyContent: 'center'}}>
+                    <View style={{flexDirection: 'row', marginVertical: 5, marginHorizontal: wp('5%'), justifyContent: 'center'}}>
                         <Checkbox status={companyInfo.registered_agent ? 'unchecked' : 'checked'} color="#f70" onPress={() => setCompanyInfo({
                             ...companyInfo,
                             registered_agent: false
-                        })} />
-                        <Caption style={{fontSize: wp('4%'), width: wp('82%')}}>I choose to use my own mane as a Registered Agent.</Caption>
+                        })} style={{flex: 1}} />
+                        <Caption style={{fontSize: wp('4%'), flex: 5, textAlign: 'center'}}>I choose to use my own name as a Registered Agent.</Caption>
                     </View>
-                    <View style={{flexDirection: 'row', marginVertical: 5, width: wp('90%'), justifyContent: 'center'}}>
+                    <View style={{flexDirection: 'row', marginVertical: 5, marginHorizontal: wp('5%'), justifyContent: 'center'}}>
                         <Checkbox status={companyInfo.registered_agent ? 'checked' : 'unchecked'} color="#f70" onPress={() => setCompanyInfo({
                             ...companyInfo,
                             registered_agent: true
-                        })} />
-                        <Caption style={{fontSize: wp('4%'), width: wp('82%')}}>I designate USBizFilings&reg; service as a Registered Agent on behalf of the company fa a fee of $85 per year.</Caption>
+                        })} style={{flex: 1}} />
+                        <Caption style={{fontSize: wp('4%'), flex: 5, textAlign: 'center'}}>I designate USBizFilings&reg; service as a Registered Agent on behalf of the company fa a fee of $85 per year.</Caption>
                     </View>
                 </View>
             </View>
