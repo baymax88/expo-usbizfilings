@@ -49,7 +49,7 @@ const Screen = ({ navigation }) => {
         contact_info,
         company_info
     } = orderData
-    const { state, inc, llc, non_profit } = STATES.filter(item => item.no === state_number)[0]
+    const { state } = STATES.filter(item => item.no === state_number)[0]
     const services = ADD_ON_SERVICES.filter(item => item.entity === entity_type)[0]
 
     const capitalizeFirstLetter = (string) => {
@@ -86,12 +86,12 @@ const Screen = ({ navigation }) => {
 
             <View style={styles.stateEntityInfoContainer}>
                 <View style={{flexDirection: 'row'}}>
-                    <Title style={{color: '#dc3545', fontSize: wp('4.5%')}}>State: </Title>
-                    <Title style={{fontSize: wp('4.5%')}}>{state}</Title>
+                    <Title style={{color: '#dc3545', fontSize: wp('4%')}}>State: </Title>
+                    <Title style={{fontSize: wp('4%')}}>{state}</Title>
                 </View>
                 <View style={{flexDirection: 'row'}}>
-                    <Title style={{color: '#dc3545', fontSize: wp('4.5%')}}>Entity: </Title>
-                    <Title style={{fontSize: wp('4.5%')}}>{entity_type}</Title>
+                    <Title style={{color: '#dc3545', fontSize: wp('4%')}}>Entity: </Title>
+                    <Title style={{fontSize: wp('4%')}}>{entity_type}</Title>
                 </View>
             </View>
 
