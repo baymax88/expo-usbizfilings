@@ -1,7 +1,8 @@
 import React, { useState, useContext, useEffect } from 'react'
-import { View, ScrollView, StyleSheet, Text } from 'react-native'
+import { View, ScrollView, StyleSheet, Text, Modal } from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack'
 import Icon from '@expo/vector-icons/Ionicons'
+import { WebView } from 'react-native-webview';
 import { useFonts, Comfortaa_700Bold } from '@expo-google-fonts/comfortaa';
 import { AppLoading } from 'expo'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -38,7 +39,8 @@ const Step5Screen = ({ navigation }) => {
     )
 }
 
-const Screen = () => {
+const Screen = ({ navigation }) => {
+    const [modalShow, setModalShow] = useState(false)
     const { orderData } = useContext(AppContext)
     const {
         state_number,
@@ -68,28 +70,33 @@ const Screen = () => {
     const totalPrice = (company_info.registered_agent) ? (package_price + state_fee + addOnServicePrice + 85) : (package_price + state_fee + addOnServicePrice)
 
     const handleSubmit = () => {
-        let data = {
-            cmd: '_xclick',
-            business: paypal_email,
-            item_name: 'usbizfilings',
-            amount: totalPrice,
-            currency_code: 'USD',
-            return: 'https://usbizfilings.com',
-            cancel_return: 'https://usbizfilings.com',
-            notify_url: 'https://usbizfilings.com/data/notify.php',
-            first_name: contact_info.first_name,
-            last_name: contact_info.last_name,
-            on0: 'Name',
-            os0: contact_info.first_name + ' ' + contact_info.last_name,
-            on1: 'Entity, Package',
-            os1: entity_type + ', ' + package_name
-        }
-        let url = 'https://www.paypal.com/cgi-bin/webscr'
+        setModalShow(true)
+    }
 
+    const handleResponse = data => {
+        if (data.title === 'cancelled') {
+            setModalShow(false)
+            navigation.navigate('Cancel')
+        } else if (data.title === 'success') {
+            setModalShow(false)
+            navigation.navigate('Success')
+        }
     }
 
     return (
         <ScrollView>
+            <Modal
+                visible={modalShow}
+                onRequestClose={() => setModalShow(false)}
+            >
+                <WebView
+                    source={{uri: 'https://usbizfilings.com/order_mobile.php'}}
+                    style={{marginTop: 50}}
+                    injectedJavaScript={`document.getElementById("business").value="${paypal_email}";document.getElementById("amount").value="${totalPrice}";document.getElementById("first_name").value="${contact_info.first_name}";document.getElementById("last_name").value="${contact_info.last_name}";document.getElementById("os0").value="${contact_info.first_name} ${contact_info.last_name}";document.getElementById("os1").value="${entity_type} ${package_name}";document.form.submit();`}
+                    onMessage={() => {}}
+                    onNavigationStateChange={data => handleResponse(data)}
+                />
+            </Modal>
             <View style={styles.stepTitleContainer}>
                 <Title style={styles.stepTitle}>
                     Step 5
