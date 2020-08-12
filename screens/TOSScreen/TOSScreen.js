@@ -18,7 +18,7 @@ const TOSScreen = ({ navigation }) => {
             <TOSStack.Screen name="TOS" component={Screen} options={{
                 title: 'Terms of Service',
                 headerLeft: () => (
-                <Icon.Button name="ios-arrow-back" size={25} backgroundColor="#00438b" onPress={() => navigation.goBack()}>Back</Icon.Button>
+                <Icon.Button name="ios-arrow-back" size={25} backgroundColor="#00438b" onPress={() => navigation.goBack()}></Icon.Button>
                 )
             }} />
         </TOSStack.Navigator>

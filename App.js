@@ -12,6 +12,8 @@ import Step2Screen from './screens/OrderScreen/Step2Screen'
 import Step3Screen from './screens/OrderScreen/Step3Screen'
 import Step4Screen from './screens/OrderScreen/Step4Screen'
 import Step5Screen from './screens/OrderScreen/Step5Screen'
+import SuccessScreen from './screens/OrderScreen/SuccessScreen';
+import CancelScreen from './screens/OrderScreen/CancelScreen';
 import TOSScreen from './screens/TOSScreen/TOSScreen'
 import ContactScreen from './screens/ContactScreen/ContactScreen'
 import SubscriptionScreen from './screens/SubscriptionScreen/SubscriptionScreen'
@@ -54,6 +56,8 @@ const App = () => {
             <Drawer.Screen name="Step3" component={Step3Screen} />
             <Drawer.Screen name="Step4" component={Step4Screen} />
             <Drawer.Screen name="Step5" component={Step5Screen} />
+            <Drawer.Screen name="Success" component={SuccessScreen} />
+            <Drawer.Screen name="Cancel" component={CancelScreen} />
             <Drawer.Screen name="TOS" component={TOSScreen} />
             <Drawer.Screen name="Contact" component={ContactScreen} />
             <Drawer.Screen name="Subscription" component={SubscriptionScreen} />
