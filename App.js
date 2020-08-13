@@ -20,6 +20,8 @@ import SubscriptionScreen from './screens/SubscriptionScreen/SubscriptionScreen'
 import DrawerContent from './components/DrawerContent';
 import AppContextProvider from './contexts/AppContext';
 
+import RootStackScreen from './screens/RootStackScreen'
+
 const Drawer = createDrawerNavigator();
 
 const theme = {
@@ -49,7 +51,7 @@ const App = () => {
     <AppContextProvider>
       <PaperProvider theme={theme}>
         <NavigationContainer>
-          <Drawer.Navigator initialRouteName="Home" drawerContent={props => <DrawerContent {...props} />}>
+          {/* <Drawer.Navigator initialRouteName="Home" drawerContent={props => <DrawerContent {...props} />}>
             <Drawer.Screen name="Home" component={HomeScreen} />
             <Drawer.Screen name="Step1" component={Step1Screen} />
             <Drawer.Screen name="Step2" component={Step2Screen} />
@@ -61,7 +63,8 @@ const App = () => {
             <Drawer.Screen name="TOS" component={TOSScreen} />
             <Drawer.Screen name="Contact" component={ContactScreen} />
             <Drawer.Screen name="Subscription" component={SubscriptionScreen} />
-          </Drawer.Navigator>
+          </Drawer.Navigator> */}
+          <RootStackScreen />
         </NavigationContainer>
       </PaperProvider>
     </AppContextProvider>
