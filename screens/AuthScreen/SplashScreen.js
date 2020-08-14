@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, View, Text, StatusBar, ScrollView } from 'react-native'
 import { Title, Button } from 'react-native-paper'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen'
 import * as Animatable from 'react-native-animatable'
+import { AppContext } from '../../contexts/AppContext'
 
 const SplashScreen = ({ navigation }) => {
+    const { setCustomer, setLoginStatus, authData } = useContext(AppContext);
+
+    const handleGuestStart = () => {
+        setCustomer({first_name: 'Guest', last_name: '', email: 'Guest'});
+        setLoginStatus(true);
+    }
+
     return (
         <ScrollView>
             <View style={styles.container}>
@@ -18,7 +26,8 @@ const SplashScreen = ({ navigation }) => {
                         <Text style={styles.text}>Sign in with account</Text>
                     </View>
                     <View style={styles.button}>
-                        <Button icon="arrow-right" mode="contained" uppercase={false} style={styles.signIn} onPress={() => navigation.navigate('Signin')}>Get Started</Button>
+                        <Button icon="arrow-right" mode="flex" uppercase={false} style={styles.start} onPress={() => navigation.navigate('Signin')}>Get Started</Button>
+                        <Button icon="arrow-right" mode="flex" uppercase={false} style={styles.startGuest} onPress={handleGuestStart}>Get Started As a Gutest</Button>
                         <View style={{marginVertical: wp('2%'), justifyContent: 'center', alignItems: 'center', alignSelf: 'center'}}>
                             <Text style={{fontSize: 10, color: 'grey'}}>Copyrights &copy; 2020. All rights reserved by USBizFilings&reg;</Text>
                         </View>
@@ -67,9 +76,13 @@ const styles = StyleSheet.create({
     },
     button: {
         alignItems: 'flex-end',
-        marginTop: 30
+        marginTop: wp('3%')
     },
-    signIn: {
-        borderRadius: wp('5%')
+    start: {
+        marginTop: wp('1%'),
+        color: '#05375a'
     },
+    startGuest: {
+        marginTop: wp('1%'),
+    }
 });

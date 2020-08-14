@@ -62,7 +62,7 @@ const SignUpScreen = ({ navigation }) => {
                             </View>
                         </Animatable.View>
                         <View style={styles.button}>
-                            <Button mode="contained" uppercase={false} style={styles.signIn} onPress={() => navigation.navigate('Signin')}>Sign In</Button>
+                            <Button mode="contained" uppercase={false} style={styles.signIn} onPress={() => navigation.push('Signin')}>Sign In</Button>
                             <Button mode="outlined" uppercase={false} style={[styles.signIn, {borderColor: '#00438b', borderWidth: 2}]} onPress={() => {}}>Sign Up</Button>
                             <View style={{marginVertical: wp('2%'), justifyContent: 'center', alignItems: 'center', alignSelf: 'center'}}>
                                 <Text style={{fontSize: 10, color: 'grey'}}>Copyrights &copy; 2020. All rights reserved by USBizFilings&reg;</Text>
