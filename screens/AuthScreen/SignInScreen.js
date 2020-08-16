@@ -11,7 +11,7 @@ const SignInScreen = ({ navigation }) => {
     const [hidePassword, setHidePassword] = useState(true);
 
     const onSubmit = () => {
-
+        console.log("email", email, "password", password)
     }
 
     return (
@@ -29,6 +29,7 @@ const SignInScreen = ({ navigation }) => {
                                 label="Email"
                                 style={styles.input}
                                 value={email}
+                                autoCapitalize="none"
                                 onChangeText={text => setEmail(text)}
                             />
                         </View>
@@ -39,6 +40,7 @@ const SignInScreen = ({ navigation }) => {
                                 style={styles.input}
                                 secureTextEntry={hidePassword}
                                 value={password}
+                                autoCapitalize="none"
                                 onChangeText={text => setPassword(text)}
                             />
                             <Icon name={hidePassword ? 'eye-outline' : 'eye-off-outline'} size={wp('6%')} color="#00438b" style={{backgroundColor: '#fff', paddingTop: wp('3%')}} onPress={() => setHidePassword(!hidePassword)} />

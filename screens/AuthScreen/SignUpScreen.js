@@ -27,6 +27,7 @@ const SignUpScreen = ({ navigation }) => {
                                 <TextInput
                                     label="First Name"
                                     style={styles.input}
+                                    autoCapitalize="none"
                                     onChangeText={text => setFirstName(text)}
                                     value={firstName}
                                 />
@@ -36,6 +37,7 @@ const SignUpScreen = ({ navigation }) => {
                                 <TextInput
                                     label="Last Name"
                                     style={styles.input}
+                                    autoCapitalize="none"
                                     onChangeText={text => setLastName(text)}
                                     value={lastName}
                                 />
@@ -45,6 +47,7 @@ const SignUpScreen = ({ navigation }) => {
                                 <TextInput
                                     label="Email"
                                     style={styles.input}
+                                    autoCapitalize="none"
                                     onChangeText={text => setEmail(text)}
                                     value={email}
                                 />
@@ -55,6 +58,7 @@ const SignUpScreen = ({ navigation }) => {
                                     label="Password"
                                     style={styles.input}
                                     secureTextEntry={hidePassword}
+                                    autoCapitalize="none"
                                     onChangeText={text => setPassword(text)}
                                     value={password}
                                 />
