@@ -67,7 +67,7 @@ const Screen = ({ navigation }) => {
                 }]
             )
         } else {
-            navigation.navigate('Step5')
+            navigation.push('Step5')
         }
     }
 
@@ -320,7 +320,7 @@ const Screen = ({ navigation }) => {
 
             {/* button container */}
             <View style={styles.buttonContainer}>
-                <Button icon="arrow-left" style={styles.prevButton} mode="contained" onPress={() => navigation.navigate('Step3')}>Step 3</Button>
+                <Button icon="arrow-left" style={styles.prevButton} mode="contained" onPress={() => navigation.push('Step3')}>Step 3</Button>
                 <Title style={{color: '#888', fontSize: wp('4%')}}>STEP 4</Title>
                 <Button icon="arrow-right" style={styles.nextButton} mode="contained" onPress={handleSubmit}>Step 5</Button>
             </View>

@@ -20,7 +20,51 @@ export const OrderReducer = (state, action) => {
                 contact_info: action.data.contact_info,
                 company_info: action.data.company_info
             }
+        case 'SET_INIT_ORDER':
+            return {
+                init_state
+            }
         default:
             return state
+    }
+}
+
+const init_state = {
+    paypal_email: 'sb-b5ij82865202@business.example.com',
+    state_number: null,
+    entity_type: null,
+    package_price: 0,
+    add_on_service: 0,
+    state_fee: 0,
+    registered_agent: 0,
+    package_name: 'standard',
+    enabled_services: [],
+    contact_info: {
+        first_name: '',
+        last_name: '',
+        address: '',
+        city: '',
+        state: '',
+        zip: '',
+        county: '',
+        country: '',
+        phone: '',
+        fax: '',
+        email: '',
+        email_primary_communication: false
+    },
+    company_info: {
+        first_company_name: '',
+        second_company_name: '',
+        description: '',
+        company_address: '',
+        company_city: '',
+        company_state: '',
+        company_zip: '',
+        company_county: '',
+        company_country: '',
+        company_phone: '',
+        company_fax: '',
+        registered_agent: true
     }
 }

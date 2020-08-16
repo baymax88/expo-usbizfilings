@@ -6,23 +6,13 @@ import { AppLoading } from 'expo';
 import * as Font from 'expo-font';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 
-import HomeScreen from './screens/HomeScreen/HomeScreen';
-import Step1Screen from './screens/OrderScreen/Step1Screen'
-import Step2Screen from './screens/OrderScreen/Step2Screen'
-import Step3Screen from './screens/OrderScreen/Step3Screen'
-import Step4Screen from './screens/OrderScreen/Step4Screen'
-import Step5Screen from './screens/OrderScreen/Step5Screen'
-import SuccessScreen from './screens/OrderScreen/SuccessScreen';
-import CancelScreen from './screens/OrderScreen/CancelScreen';
-import TOSScreen from './screens/TOSScreen/TOSScreen'
-import ContactScreen from './screens/ContactScreen/ContactScreen'
-import SubscriptionScreen from './screens/SubscriptionScreen/SubscriptionScreen'
 import DrawerContent from './components/DrawerContent';
-// import { AppContextProvider, AppContext } from './contexts/AppContext';
 import { AppContext } from './contexts/AppContext';
 import AppContextProvider from './contexts/AppContext';
 
-import RootStackScreen from './screens/RootStackScreen'
+import RootStackScreen from './screens/RootStackScreen';
+import MainStackScreen from './screens/MainStackScreen';
+
 
 const Drawer = createDrawerNavigator();
 
@@ -73,17 +63,7 @@ const Nav = () => {
     <>
       { login_status ? (
         <Drawer.Navigator initialRouteName="Home" drawerContent={props => <DrawerContent data={authData} {...props} authHandler={authHandler} />}>
-          <Drawer.Screen name="Home" component={HomeScreen} />
-          <Drawer.Screen name="Step1" component={Step1Screen} />
-          <Drawer.Screen name="Step2" component={Step2Screen} />
-          <Drawer.Screen name="Step3" component={Step3Screen} />
-          <Drawer.Screen name="Step4" component={Step4Screen} />
-          <Drawer.Screen name="Step5" component={Step5Screen} />
-          <Drawer.Screen name="Success" component={SuccessScreen} />
-          <Drawer.Screen name="Cancel" component={CancelScreen} />
-          <Drawer.Screen name="TOS" component={TOSScreen} />
-          <Drawer.Screen name="Contact" component={ContactScreen} />
-          <Drawer.Screen name="Subscription" component={SubscriptionScreen} />
+          <Drawer.Screen name="Screens" component={MainStackScreen} />
         </Drawer.Navigator>) : (
         <RootStackScreen />
       )}
