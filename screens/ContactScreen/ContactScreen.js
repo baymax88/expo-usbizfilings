@@ -47,7 +47,7 @@ const Screen = () => (
     </ImageBackground>
 
     <TextInput label="Enter Name" mode="outlined" style={styles.inputField} />
-    <TextInput label="Enter Email" mode="outlined" style={styles.inputField} />
+    <TextInput label="Enter Email" mode="outlined" autoCapitalize="none" style={styles.inputField} />
     <TextInput label="Messge" mode="outlined" multiline={true} numberOfLines={5} style={styles.inputField} />
     <Button mode="contained" style={{marginTop: 10, marginHorizontal: wp('4%')}}>Send Message</Button>
 

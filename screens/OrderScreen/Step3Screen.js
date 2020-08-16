@@ -303,6 +303,7 @@ const Screen = ({ navigation }) => {
                     label="Email *"
                     mode="outlined"
                     style={{width: wp('92%'), marginHorizontal: wp('4%'), marginVertical: 5}}
+                    autoCapitalize="none"
                     value={contactInfo.email}
                     onChangeText={text => {
                         if (text === '' || !text.includes('@')) {

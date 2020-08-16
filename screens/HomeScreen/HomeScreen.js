@@ -5,7 +5,7 @@ import Icon from '@expo/vector-icons/Ionicons'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { AppLoading } from 'expo';
 import { useFonts, Comfortaa_700Bold } from '@expo-google-fonts/comfortaa';
-import { Icon as AntIcon, Button as AntButton } from '@ant-design/react-native';
+import { Icon as AntIcon } from '@ant-design/react-native';
 import { Button } from 'react-native-paper'
 
 const HomeStack = createStackNavigator();
