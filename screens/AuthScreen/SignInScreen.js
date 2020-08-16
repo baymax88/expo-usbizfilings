@@ -1,61 +1,99 @@
 import React, { useState, useContext } from 'react';
-import { StyleSheet, View, Text, StatusBar, ScrollView } from 'react-native'
-import { Title, Button, TextInput } from 'react-native-paper'
+import { StyleSheet, View, Text, StatusBar, ScrollView, ActivityIndicator } from 'react-native'
+import { HelperText, Button, TextInput } from 'react-native-paper'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen'
 import * as Animatable from 'react-native-animatable'
 import Icon from '@expo/vector-icons/MaterialCommunityIcons'
+import { AppContext } from '../../contexts/AppContext';
 
 const SignInScreen = ({ navigation }) => {
+    const { setCustomer, setLoginStatus } = useContext(AppContext);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [hidePassword, setHidePassword] = useState(true);
+    const [showErr, setShowErr] = useState(false);
+    const [errMessage, setErrMessage] = useState('');
+    const [isReady, setIsReady] = useState(true)
 
-    const onSubmit = () => {
-        console.log("email", email, "password", password)
+    const onSubmit = async () => {
+        await setIsReady(false);
+        await fetch('https://usbizfilings.com/mobile/v1/login', {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email, password })
+        }).then(res => res.json()).then(json => {
+            if (json.status) {
+                setIsReady(true);
+                setCustomer({first_name: json.fistname, last_name: json.lastname, email: json.email});
+                setLoginStatus(true);
+            } else {
+                setIsReady(true);
+                setErrMessage(json.status_message);
+                setShowErr(true);
+            }
+        });
     }
 
     return (
-        <ScrollView>
-            <View style={styles.container}>
-                <StatusBar barStyle="light-content" />
-                <View style={styles.header}>
-                    <Text style={styles.text_header}>Welcome!</Text>
-                </View>
-                <Animatable.View style={styles.footer}>
-                    <Animatable.View animation="bounceIn">
-                        <View style={styles.inputContainer}>
-                            <Icon name="email-outline" size={wp('6%')} color="#00438b" style={styles.inputIcon} />
-                            <TextInput
-                                label="Email"
-                                style={styles.input}
-                                value={email}
-                                autoCapitalize="none"
-                                onChangeText={text => setEmail(text)}
-                            />
-                        </View>
-                        <View style={styles.inputContainer}>
-                            <Icon name="shield-key-outline" size={wp('6%')} color="#00438b" style={styles.inputIcon} />
-                            <TextInput
-                                label="Password"
-                                style={styles.input}
-                                secureTextEntry={hidePassword}
-                                value={password}
-                                autoCapitalize="none"
-                                onChangeText={text => setPassword(text)}
-                            />
-                            <Icon name={hidePassword ? 'eye-outline' : 'eye-off-outline'} size={wp('6%')} color="#00438b" style={{backgroundColor: '#fff', paddingTop: wp('3%')}} onPress={() => setHidePassword(!hidePassword)} />
+        <>
+        {isReady ? (
+            <ScrollView>
+                <View style={styles.container}>
+                    <StatusBar barStyle="light-content" />
+                    <View style={styles.header}>
+                        <Text style={styles.text_header}>Welcome!</Text>
+                    </View>
+                    <Animatable.View style={styles.footer}>
+                        <Animatable.View animation="bounceIn">
+                            <View style={styles.inputContainer}>
+                                <Icon name="email-outline" size={wp('6%')} color="#00438b" style={styles.inputIcon} />
+                                <TextInput
+                                    label="Email"
+                                    style={styles.input}
+                                    value={email}
+                                    autoCapitalize="none"
+                                    onChangeText={text => {
+                                        setEmail(text);
+                                        setShowErr(false);
+                                    }}
+                                />
+                            </View>
+                            <View style={styles.inputContainer}>
+                                <Icon name="shield-key-outline" size={wp('6%')} color="#00438b" style={styles.inputIcon} />
+                                <TextInput
+                                    label="Password"
+                                    style={styles.input}
+                                    secureTextEntry={hidePassword}
+                                    value={password}
+                                    autoCapitalize="none"
+                                    onChangeText={text => {
+                                        setPassword(text);
+                                        setShowErr(false);
+                                    }}
+                                />
+                                <Icon name={hidePassword ? 'eye-outline' : 'eye-off-outline'} size={wp('6%')} color="#00438b" style={{backgroundColor: '#fff', paddingTop: wp('3%')}} onPress={() => setHidePassword(!hidePassword)} />
+                            </View>
+                        </Animatable.View>
+                        <HelperText type="error" visible={showErr} style={{marginTop: wp('1%')}}>
+                            {errMessage}
+                        </HelperText>
+                        <View style={styles.button}>
+                            <Button mode="contained" uppercase={false} style={styles.signIn} onPress={onSubmit}>Sign In</Button>
+                            <Button mode="outlined" uppercase={false} style={[styles.signIn, {borderColor: '#00438b', borderWidth: 2}]} onPress={() => {navigation.push('Signup')}}>Sign Up</Button>
+                            <View style={{marginVertical: wp('2%'), justifyContent: 'center', alignItems: 'center', alignSelf: 'center'}}>
+                                <Text style={{fontSize: 10, color: 'grey'}}>Copyrights &copy; 2020. All rights reserved by USBizFilings&reg;</Text>
+                            </View>
                         </View>
                     </Animatable.View>
-                    <View style={styles.button}>
-                        <Button mode="contained" uppercase={false} style={styles.signIn} onPress={onSubmit}>Sign In</Button>
-                        <Button mode="outlined" uppercase={false} style={[styles.signIn, {borderColor: '#00438b', borderWidth: 2}]} onPress={() => {navigation.push('Signup')}}>Sign Up</Button>
-                        <View style={{marginVertical: wp('2%'), justifyContent: 'center', alignItems: 'center', alignSelf: 'center'}}>
-                            <Text style={{fontSize: 10, color: 'grey'}}>Copyrights &copy; 2020. All rights reserved by USBizFilings&reg;</Text>
-                        </View>
-                    </View>
-                </Animatable.View>
-            </View>
-        </ScrollView>
+                </View>
+            </ScrollView>
+        ) : (
+            <ActivityIndicator color="#00438b" size="large" style={{flex: 1, alignItems: 'center', justifyContent: 'center'}} />
+        )}
+        </>
     )
 }
 
