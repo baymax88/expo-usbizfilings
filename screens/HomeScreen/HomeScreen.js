@@ -46,9 +46,7 @@ const Screen = ({ navigation }) => (
         <Text style={styles.title}>
           Welcome to USBizFilings&reg;, a leading Business Filing and Registration Service
         </Text>
-        <AntButton style={{marginTop: 12, backgroundColor: '#f70', borderColor: '#f70', alignItems: 'center', height: 30}} type="warning">
-          <Text style={{fontFamily: 'Comfortaa_700Bold', fontSize: 14}} onPress={() => navigation.navigate('Step1')}>Order Now</Text>
-        </AntButton>
+        <Button mode="contained" style={{backgroundColor: '#f70', marginTop: wp('4%')}} onPress={() => navigation.navigate('Step1')} uppercase={false}>Order Now</Button>
       </View>
     </ImageBackground>
 
@@ -86,9 +84,7 @@ const Screen = ({ navigation }) => (
           <Text style={styles.title}>
             Increase Your Business Presence and Credibility
           </Text>
-          <AntButton style={{marginTop: 12, backgroundColor: '#f70', borderColor: '#f70', alignItems: 'center', height: 30}} type="warning">
-            <Text style={{fontFamily: 'Comfortaa_700Bold', fontSize: 14}} onPress={() => navigation.navigate('Step1')}>Start Now</Text>
-          </AntButton>
+          <Button uppercase={false} style={{backgroundColor: '#f70', marginTop: wp('4%')}} onPress={() => navigation.navigate('Step1')} labelStyle={{color: '#fff'}}>Start Now</Button>
         </View>
       </ImageBackground>
 
