@@ -13,7 +13,7 @@ const AppContextProvider = (props) => {
         add_on_service: 0,
         state_fee: 0,
         registered_agent: 0,
-        package_name: 'standard',
+        package_name: '',
         enabled_services: [],
         contact_info: {
             first_name: '',
@@ -72,8 +72,12 @@ const AppContextProvider = (props) => {
         dispatch({type: 'SET_STEP3', data})
     }
 
+    const setInitOrder = () => {
+        dispatch({type: 'SET_INIT_ORDER'});
+    }
+
     return (
-        <AppContext.Provider value={{orderData, authData, setStep1, setStep2, setStep3, setCustomer, setLoginStatus}}>
+        <AppContext.Provider value={{orderData, authData, setStep1, setStep2, setStep3, setCustomer, setLoginStatus, setInitOrder}}>
             {props.children}
         </AppContext.Provider>
     )

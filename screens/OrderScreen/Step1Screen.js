@@ -58,7 +58,7 @@ const Screen = ({ navigation }) => {
       setValid(false)
     } else {
       setStep1({ state_number: state, entity_type: entity, state_fee: stateFee })
-      navigation.navigate('Step2')
+      navigation.push('Step2')
     }
   }
 
@@ -88,7 +88,7 @@ const Screen = ({ navigation }) => {
           <SelectPicker.Item label={item.state} value={item.no} key={item.no} />
         ))}
       </SelectPicker>
-      
+
       {/* part for selection entity type */}
       <Title style={styles.title}>
         Please select the Entity Type here.
@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 60
+    marginVertical: wp('8%')
   },
   nextButton: {
     alignSelf: 'flex-end'

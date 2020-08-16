@@ -42,7 +42,7 @@ const Step2Screen = ({ navigation }) => {
 const Screen = ({ navigation }) => {
     const { orderData, setStep2 } = useContext(AppContext)
     const services = ADD_ON_SERVICES.filter(item => item.entity === orderData.entity_type)[0]
-    const [pkg, setPkg] = useState(orderData.package_name)
+    const [pkg, setPkg] = useState('standard')
     const [pkgPrice, setPkgPrice] = useState(services.package_price[pkg])
     const [enabledServices, setEnabledServices] = useState([])
 
@@ -60,7 +60,7 @@ const Screen = ({ navigation }) => {
 
     const handleSubmit = () => {
         setStep2({enabled_services: enabledServices, package_price: pkgPrice, package_name: pkg})
-        navigation.navigate('Step3')
+        navigation.push('Step3')
     }
 
     return (
@@ -125,7 +125,7 @@ const Screen = ({ navigation }) => {
 
             {/* button container */}
             <View style={styles.buttonContainer}>
-                <Button icon="arrow-left" style={styles.prevButton} mode="contained" onPress={() => navigation.navigate('Step1')}>Step 1</Button>
+                <Button icon="arrow-left" style={styles.prevButton} mode="contained" onPress={() => navigation.push('Step1')}>Step 1</Button>
                 <Title style={{color: '#888', fontSize: wp('4%')}}>STEP 2</Title>
                 <Button icon="arrow-right" style={styles.nextButton} mode="contained" onPress={handleSubmit}>Step 3</Button>
             </View>

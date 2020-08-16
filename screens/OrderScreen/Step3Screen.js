@@ -137,7 +137,7 @@ const Screen = ({ navigation }) => {
             checkValidation()
         } else {
             setStep3({contact_info: contactInfo, company_info: companyInfo})
-            navigation.navigate('Step4')
+            navigation.push('Step4')
         }
     }
 
@@ -520,7 +520,7 @@ const Screen = ({ navigation }) => {
 
             {/* button container */}
             <View style={styles.buttonContainer}>
-                <Button icon="arrow-left" style={styles.prevButton} mode="contained" onPress={() => navigation.navigate('Step2')}>Step 2</Button>
+                <Button icon="arrow-left" style={styles.prevButton} mode="contained" onPress={() => navigation.push('Step2')}>Step 2</Button>
                 <Title style={{color: '#888', fontSize: wp('4%')}}>STEP 3</Title>
                 <Button icon="arrow-right" style={styles.nextButton} mode="contained" onPress={handleSubmit}>Step 4</Button>
             </View>
