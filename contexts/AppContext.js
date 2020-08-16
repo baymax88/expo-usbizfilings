@@ -1,5 +1,6 @@
 import React, { createContext, useReducer } from 'react';
 import { OrderReducer } from '../reducers/OrderReducer'
+import { AuthReducer } from '../reducers/AuthReducer'
 
 export const AppContext = createContext()
 
@@ -44,6 +45,21 @@ const AppContextProvider = (props) => {
         }
     })
 
+    const [authData, dispatch2] = useReducer(AuthReducer, {
+        first_name: '',
+        second_name: '',
+        email: '',
+        login_status: false
+    })
+
+    const setCustomer = (data) => {
+        dispatch2({type: 'SET_CUSTOMER', data});
+    }
+
+    const setLoginStatus = (data) => {
+        dispatch2({type: 'SET_LOGIN_STATUS', data});
+    }
+
     const setStep1 = (data) => {
         dispatch({type: 'SET_STEP1', data})
     }
@@ -57,7 +73,7 @@ const AppContextProvider = (props) => {
     }
 
     return (
-        <AppContext.Provider value={{orderData, setStep1, setStep2, setStep3}}>
+        <AppContext.Provider value={{orderData, authData, setStep1, setStep2, setStep3, setCustomer, setLoginStatus}}>
             {props.children}
         </AppContext.Provider>
     )

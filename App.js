@@ -1,10 +1,10 @@
 import 'react-native-gesture-handler';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { AppLoading } from 'expo';
 import * as Font from 'expo-font';
-import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper'
+import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 
 import HomeScreen from './screens/HomeScreen/HomeScreen';
 import Step1Screen from './screens/OrderScreen/Step1Screen'
@@ -18,7 +18,11 @@ import TOSScreen from './screens/TOSScreen/TOSScreen'
 import ContactScreen from './screens/ContactScreen/ContactScreen'
 import SubscriptionScreen from './screens/SubscriptionScreen/SubscriptionScreen'
 import DrawerContent from './components/DrawerContent';
+// import { AppContextProvider, AppContext } from './contexts/AppContext';
+import { AppContext } from './contexts/AppContext';
 import AppContextProvider from './contexts/AppContext';
+
+import RootStackScreen from './screens/RootStackScreen'
 
 const Drawer = createDrawerNavigator();
 
@@ -45,27 +49,46 @@ const App = () => {
   if (!isReady) {
     return <AppLoading />;
   }
+
   return (
     <AppContextProvider>
       <PaperProvider theme={theme}>
         <NavigationContainer>
-          <Drawer.Navigator initialRouteName="Home" drawerContent={props => <DrawerContent {...props} />}>
-            <Drawer.Screen name="Home" component={HomeScreen} />
-            <Drawer.Screen name="Step1" component={Step1Screen} />
-            <Drawer.Screen name="Step2" component={Step2Screen} />
-            <Drawer.Screen name="Step3" component={Step3Screen} />
-            <Drawer.Screen name="Step4" component={Step4Screen} />
-            <Drawer.Screen name="Step5" component={Step5Screen} />
-            <Drawer.Screen name="Success" component={SuccessScreen} />
-            <Drawer.Screen name="Cancel" component={CancelScreen} />
-            <Drawer.Screen name="TOS" component={TOSScreen} />
-            <Drawer.Screen name="Contact" component={ContactScreen} />
-            <Drawer.Screen name="Subscription" component={SubscriptionScreen} />
-          </Drawer.Navigator>
+          <Nav />
         </NavigationContainer>
       </PaperProvider>
     </AppContextProvider>
   );
 };
+
+const Nav = () => {
+  const { authData, setLoginStatus } = useContext(AppContext)
+  const { login_status } = authData
+
+  const authHandler = (data) => {
+    setLoginStatus(data)
+  }
+
+  return (
+    <>
+      { login_status ? (
+        <Drawer.Navigator initialRouteName="Home" drawerContent={props => <DrawerContent data={authData} {...props} authHandler={authHandler} />}>
+          <Drawer.Screen name="Home" component={HomeScreen} />
+          <Drawer.Screen name="Step1" component={Step1Screen} />
+          <Drawer.Screen name="Step2" component={Step2Screen} />
+          <Drawer.Screen name="Step3" component={Step3Screen} />
+          <Drawer.Screen name="Step4" component={Step4Screen} />
+          <Drawer.Screen name="Step5" component={Step5Screen} />
+          <Drawer.Screen name="Success" component={SuccessScreen} />
+          <Drawer.Screen name="Cancel" component={CancelScreen} />
+          <Drawer.Screen name="TOS" component={TOSScreen} />
+          <Drawer.Screen name="Contact" component={ContactScreen} />
+          <Drawer.Screen name="Subscription" component={SubscriptionScreen} />
+        </Drawer.Navigator>) : (
+        <RootStackScreen />
+      )}
+    </>
+  )
+}
 
 export default App;
