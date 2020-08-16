@@ -3,50 +3,50 @@ import { View, StyleSheet, Image } from 'react-native';
 import { DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer'
 import { Avatar, Title, Caption, Paragraph, Drawer, Text, TouchableRipple, Switch } from 'react-native-paper'
 import Icon from '@expo/vector-icons/MaterialCommunityIcons'
-import { widthPercentageToDP } from 'react-native-responsive-screen';
+import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 
-const DrawerContent = ({...props}) => {
+const DrawerContent = ({ data, navigation, authHandler }) => {
   return (
     <View style={styles.drawerContent}>
-      <DrawerContentScrollView {...props}>
+      <DrawerContentScrollView>
         <View style={styles.drawerContent}>
           <View style={styles.userInfoSection}>
             <View>
               <Title style={styles.logo}>USBizFilings&reg;</Title>
-              <Title style={styles.title}>Jhon Doe</Title>
-              <Caption style={styles.caption}>jhondoe@gmail.coom</Caption>
+              <Title style={styles.title}>{data.first_name} {data.last_name}</Title>
+              <Caption style={styles.caption}>{data.email}</Caption>
             </View>
           </View>
         </View>
 
         <Drawer.Section style={styles.drawerSection}>
           <DrawerItem
-            icon={({ color, size }) => (
-              <Icon name="human-greeting" color={color} size={size} />
+            icon={({ size }) => (
+              <Icon name="human-greeting" color="#00438b" size={size} />
             )}
             label="Introduction"
-            onPress={() => {props.navigation.navigate('Home')}}
+            onPress={() => {navigation.navigate('Home')}}
           />
           <DrawerItem
-            icon={({ color, size }) => (
-              <Icon name="square-edit-outline" color={color} size={size} />
+            icon={({ size }) => (
+              <Icon name="square-edit-outline" color="#00438b" size={size} />
             )}
             label="Order"
-            onPress={() => {props.navigation.navigate('Step1')}}
+            onPress={() => {navigation.navigate('Step1')}}
           />
           <DrawerItem
-            icon={({ color, size }) => (
-              <Icon name="email-edit-outline" color={color} size={size} />
+            icon={({ size }) => (
+              <Icon name="email-edit-outline" color="#00438b" size={size} />
             )}
             label="Contact"
-            onPress={() => {props.navigation.navigate('Contact')}}
+            onPress={() => {navigation.navigate('Contact')}}
           />
           <DrawerItem
-            icon={({ color, size }) => (
-              <Icon name="email-newsletter" color={color} size={size} />
+            icon={({ size }) => (
+              <Icon name="email-newsletter" color="#00438b" size={size} />
             )}
             label="Subscription"
-            onPress={() => {props.navigation.navigate('Subscription')}}
+            onPress={() => {navigation.navigate('Subscription')}}
           />
         </Drawer.Section>
 
@@ -64,11 +64,11 @@ const DrawerContent = ({...props}) => {
 
       <Drawer.Section style={styles.bottomDrawerSection}>
         <DrawerItem
-          icon={({ color, size }) => (
-            <Icon name="exit-to-app" color={color} size={size} />
+          icon={({ size }) => (
+            <Icon name="exit-to-app" color="#f70" size={size} />
           )}
           label="Sign Out"
-          onPress={() => {}}
+          onPress={() => authHandler(false)}
         />
       </Drawer.Section>
     </View>
@@ -85,6 +85,7 @@ const styles = StyleSheet.create({
   logo: {
     fontStyle: 'italic',
     fontWeight: 'bold',
+    color: '#f50'
   },
   title: {
     fontSize: 16,
