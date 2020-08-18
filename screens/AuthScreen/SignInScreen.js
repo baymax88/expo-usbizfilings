@@ -68,7 +68,6 @@ const SignInScreen = ({ navigation }) => {
                                     style={styles.input}
                                     secureTextEntry={hidePassword}
                                     value={password}
-                                    autoCapitalize="none"
                                     onChangeText={text => {
                                         setPassword(text);
                                         setShowErr(false);
@@ -84,7 +83,7 @@ const SignInScreen = ({ navigation }) => {
                             <Button mode="contained" uppercase={false} style={styles.signIn} onPress={onSubmit}>Sign In</Button>
                             <Button mode="outlined" uppercase={false} style={[styles.signIn, {borderColor: '#00438b', borderWidth: 2}]} onPress={() => {navigation.push('Signup')}}>Sign Up</Button>
                             <View style={{marginVertical: wp('2%'), justifyContent: 'center', alignItems: 'center', alignSelf: 'center'}}>
-                                <Text style={{fontSize: 10, color: 'grey'}}>Copyrights &copy; 2020. All rights reserved by USBizFilings&reg;</Text>
+                                <Text style={{fontSize: 10, color: '#000'}}>Copyrights &copy; 2020. All rights reserved by USBizFilings&reg;</Text>
                             </View>
                         </View>
                     </Animatable.View>
