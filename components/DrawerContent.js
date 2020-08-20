@@ -41,13 +41,13 @@ const DrawerContent = ({ data, navigation, authHandler }) => {
             label="Contact"
             onPress={() => {navigation.navigate('Contact')}}
           />
-          <DrawerItem
+          {/* <DrawerItem
             icon={({ size }) => (
               <Icon name="email-newsletter" color="#00438b" size={size} />
             )}
             label="Subscription"
             onPress={() => {navigation.navigate('Subscription')}}
-          />
+          /> */}
         </Drawer.Section>
 
       </DrawerContentScrollView>
