@@ -6,7 +6,7 @@ export const AppContext = createContext()
 
 const AppContextProvider = (props) => {
     const [orderData, dispatch] = useReducer(OrderReducer, {
-        paypal_email: 'sb-b5ij82865202@business.example.com',
+        paypal_email: 'drshamroukh@yahoo.com',
         state_number: null,
         entity_type: null,
         package_price: 0,
