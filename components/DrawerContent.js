@@ -50,16 +50,6 @@ const DrawerContent = ({ data, navigation, authHandler }) => {
           />
         </Drawer.Section>
 
-        <Drawer.Section title="Preferences">
-          <TouchableRipple onPress={() => {}}>
-            <View style={styles.preference}>
-              <Text>Dark Theme</Text>
-              <View>
-                <Switch />
-              </View>
-            </View>
-          </TouchableRipple>
-        </Drawer.Section>
       </DrawerContentScrollView>
 
       <Drawer.Section style={styles.bottomDrawerSection}>

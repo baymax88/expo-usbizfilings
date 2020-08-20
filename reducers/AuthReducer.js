@@ -4,7 +4,7 @@ export const AuthReducer = (state, action) => {
             return {
                 ...state,
                 first_name: action.data.first_name,
-                second_name: action.data.second_name,
+                last_name: action.data.last_name,
                 email: action.data.email
             }
         case 'SET_LOGIN_STATUS':

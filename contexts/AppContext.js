@@ -47,7 +47,7 @@ const AppContextProvider = (props) => {
 
     const [authData, dispatch2] = useReducer(AuthReducer, {
         first_name: '',
-        second_name: '',
+        last_name: '',
         email: '',
         login_status: false
     })

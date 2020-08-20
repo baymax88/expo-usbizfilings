@@ -27,7 +27,7 @@ const SignInScreen = ({ navigation }) => {
         }).then(res => res.json()).then(json => {
             if (json.status) {
                 setIsReady(true);
-                setCustomer({first_name: json.fistname, last_name: json.lastname, email: json.email});
+                setCustomer({first_name: json.firstname, last_name: json.lastname, email: json.email});
                 setLoginStatus(true);
             } else {
                 setIsReady(true);
