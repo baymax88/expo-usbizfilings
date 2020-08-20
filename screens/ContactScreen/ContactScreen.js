@@ -1,8 +1,8 @@
-import React from 'react'
-import { View, Text, ScrollView, StyleSheet, ImageBackground, StatusBar } from 'react-native'
+import React, { useState } from 'react'
+import { View, Text, ScrollView, StyleSheet, ImageBackground, StatusBar, ActivityIndicator, Alert } from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack'
 import Icon from '@expo/vector-icons/Ionicons'
-import { Title, TextInput, Caption, Button } from 'react-native-paper'
+import { Title, TextInput, Caption, Button, HelperText } from 'react-native-paper'
 import { AppLoading } from 'expo'
 import { useFonts, Comfortaa_700Bold } from '@expo-google-fonts/comfortaa';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -36,49 +36,133 @@ const ContactScreen = ({ navigation }) => {
   )
 }
 
-const Screen = () => (
-  <ScrollView>
-    <StatusBar barStyle="light-content" translucent backgroundColor="transparent"  />
+const Screen = () => {
+  const [name, setName] = useState('');
+  const [message, setMessage] = useState('');
+  const [email, setEmail] = useState('');
+  const [errText, setErrText] = useState('');
+  const [showErr, setShowErr] = useState(false);
+  const [isReady, setIsReady] = useState(true);
 
-    <ImageBackground source={require('../../assets/images/bg/contact.jpg')} style={styles.imageBg}>
-      <View style={styles.titleContainer}>
-        <Title style={styles.mainFont}>Need More Help, or Have a Specific Question?</Title>
-      </View>
-    </ImageBackground>
+  const onSubmit = async () => {
+    if (name === '' || message === '' || email === '') {
+      setErrText('Enter all information correctly.');
+      setShowErr(true)
+    } else {
+      await setIsReady(false);
+      await fetch('https://usbizfilings.com/mobile/v1/contact', {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, message, email })
+      }).then(res => res.json()).then(json => {
+        if (json.status) {
+          setIsReady(true);
+          Alert.alert(
+            "Success!",
+            "Email is sent!",
+          );
+        } else {
+          setIsReady(true);
+          setErrText(json.status_message);
+          setShowErr(true);
+        }
+      });
+    }
+  }
 
-    <TextInput label="Enter Name" mode="outlined" style={styles.inputField} />
-    <TextInput label="Enter Email" mode="outlined" autoCapitalize="none" style={styles.inputField} />
-    <TextInput label="Messge" mode="outlined" multiline={true} numberOfLines={5} style={styles.inputField} />
-    <Button mode="contained" style={{marginTop: 10, marginHorizontal: wp('4%')}}>Send Message</Button>
+  return (
+    <>
+    {isReady ? (
+      <ScrollView>
+        <StatusBar barStyle="light-content" translucent backgroundColor="transparent"  />
 
-    <View style={{borderBottomWidth: 1, borderBottomColor: '#aaa', marginHorizontal: wp('2%'), marginVertical: 20}} />
-    <View style={styles.titleContainer}>
-      <Title style={styles.blackTitle}>
-        Looking for More Business or Nonprofit Consultation?
-      </Title>
-      <Caption style={styles.caption}>
-        Don't hesitate. Contact us today and take advantage of our FREE initial consultation to answer specific questions that you may have about your business filing or nonprofit needs.
-        Our team is always available and will contact you back within 24 - 48 hours.
-      </Caption>
-    </View>
+        <ImageBackground source={require('../../assets/images/bg/contact.jpg')} style={styles.imageBg}>
+          <View style={styles.titleContainer}>
+            <Title style={styles.mainFont}>Need More Help, or Have a Specific Question?</Title>
+          </View>
+        </ImageBackground>
 
-    <View style={{borderBottomWidth: 1, borderBottomColor: '#aaa', marginHorizontal: wp('2%'), marginVertical: 20}} />
-    <Title style={styles.blackTitleSm}>
-      Our Headquarters
-    </Title>
-    <View style={{marginHorizontal: wp('4%'), marginVertical: wp('4%')}}>
-      <Caption style={styles.caption}>1001 Woodward Ave.</Caption>
-      <Caption style={styles.caption}>Detroit, Michigan 48226</Caption>
-      <Caption style={styles.caption}>USA</Caption>
-      <Caption style={styles.caption}>Note: We do not provide a walk-in service</Caption>
-    </View>
+        <TextInput
+          label="Enter Name"
+          mode="outlined"
+          style={styles.inputField}
+          value={name}
+          onChangeText={text => {
+            setName(text)
+            setShowErr(false)
+          }}
+        />
+        <TextInput
+          label="Enter Email"
+          mode="outlined"
+          autoCapitalize="none"
+          style={styles.inputField}
+          value={email}
+          onChangeText={text => {
+            setEmail(text)
+            setShowErr(false)
+          }}
+        />
+        <TextInput
+          label="Messge"
+          mode="outlined"
+          multiline={true}
+          numberOfLines={5}
+          style={styles.inputField}
+          value={message}
+          onChangeText={text => {
+            setMessage(text)
+            setShowErr(false)
+          }}
+        />
 
-    <View style={{borderBottomWidth: 1, borderBottomColor: '#aaa', marginHorizontal: wp('2%')}} />
-    <View style={{marginTop: 20, marginBottom: 20, justifyContent: 'center', alignItems: 'center'}}>
-      <Text style={{fontSize: 12}}>Copyrights &copy; 2020. All rights reserved by USBizFilings&reg;</Text>
-    </View>
-  </ScrollView>
-)
+        <HelperText type="error" visible={showErr} style={{marginTop: wp('1%')}}>
+            {errText}
+        </HelperText>
+
+        <Button
+          mode="contained"
+          style={{marginTop: 10, marginHorizontal: wp('4%')}}
+          onPress={onSubmit}
+        >
+          Send Message
+        </Button>
+
+        <View style={{borderBottomWidth: 1, borderBottomColor: '#aaa', marginHorizontal: wp('2%'), marginVertical: 20}} />
+        <View style={styles.titleContainer}>
+          <Title style={styles.blackTitle}>
+            Looking for More Business or Nonprofit Consultation?
+          </Title>
+          <Caption style={styles.caption}>
+            Don't hesitate. Contact us today and take advantage of our FREE initial consultation to answer specific questions that you may have about your business filing or nonprofit needs.
+            Our team is always available and will contact you back within 24 - 48 hours.
+          </Caption>
+        </View>
+
+        <View style={{borderBottomWidth: 1, borderBottomColor: '#aaa', marginHorizontal: wp('2%'), marginVertical: 20}} />
+        <Title style={styles.blackTitleSm}>
+          Our Headquarters
+        </Title>
+        <View style={{marginHorizontal: wp('4%'), marginVertical: wp('4%')}}>
+          <Caption style={styles.caption}>1001 Woodward Ave.</Caption>
+          <Caption style={styles.caption}>Detroit, Michigan 48226</Caption>
+          <Caption style={styles.caption}>USA</Caption>
+          <Caption style={styles.caption}>Note: We do not provide a walk-in service</Caption>
+        </View>
+
+        <View style={{borderBottomWidth: 1, borderBottomColor: '#aaa', marginHorizontal: wp('2%')}} />
+        <View style={{marginTop: 20, marginBottom: 20, justifyContent: 'center', alignItems: 'center'}}>
+          <Text style={{fontSize: 12}}>Copyrights &copy; 2020. All rights reserved by USBizFilings&reg;</Text>
+        </View>
+      </ScrollView>) : (
+      <ActivityIndicator color="#00438b" size="large" style={{flex: 1, alignItems: 'center', justifyContent: 'center'}} />
+    )}
+    </>
+  );
+}
 
 const styles = StyleSheet.create({
   mainFont: {
