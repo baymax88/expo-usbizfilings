@@ -89,7 +89,7 @@ const Screen = ({ navigation }) => (
           The company is headquartered in Detroit, Michigan.
         </Text>
 
-        <View style={{marginTop: 20, alignItems: 'center', flexDirection: 'row', justifyContent: 'space-around'}}>
+        {/* <View style={{marginTop: 20, alignItems: 'center', flexDirection: 'row', justifyContent: 'space-around'}}>
 
           <View style={{alignItems: 'center'}}>
             <AntIcon name="like" style={{color: '#b17cc6'}}></AntIcon>
@@ -101,7 +101,7 @@ const Screen = ({ navigation }) => (
             <Text style={{fontSize: 16, color: '#f70'}}>2150 Active Users</Text>
           </View>
 
-        </View>
+        </View> */}
 
       </View>
     </View>
