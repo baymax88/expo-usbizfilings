@@ -73,6 +73,17 @@ const Screen = ({ navigation }) => {
         setModalShow(true)
     }
 
+    const mkRanString = len => {
+        let result = ''
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+        const charactersLength = characters.length
+        for (let i = 0; i < len; i++) {
+            result += characters.charAt(Math.floor(Math.random() * charactersLength))
+        }
+
+        return result
+    }
+
     const handleResponse = data => {
         if (data.title === 'cancelled') {
             setModalShow(false)
@@ -90,9 +101,9 @@ const Screen = ({ navigation }) => {
                 onRequestClose={() => setModalShow(false)}
             >
                 <WebView
-                    source={{uri: 'https://usbizfilings.com/order_mobile.php'}}
+                    source={{uri: `https://usbizfilings.com/order_mobile.php?cache_bust=${mkRanString(8)}`}}
                     style={{marginTop: 50}}
-                    injectedJavaScript={`document.getElementById("business").value="${paypal_email}";document.getElementById("amount").value="${totalPrice}";document.getElementById("first_name").value="${contact_info.first_name}";document.getElementById("last_name").value="${contact_info.last_name}";document.getElementById("os0").value="${contact_info.first_name} ${contact_info.last_name}";document.getElementById("os1").value="${entity_type} ${package_name}";document.form.submit();`}
+                    injectedJavaScript={`document.getElementById("business").value="${paypal_email}";document.getElementById("amount").value="${totalPrice}";document.getElementById("first_name").value="${contact_info.first_name}";document.getElementById("last_name").value="${contact_info.last_name}";document.getElementById("os0").value="${contact_info.first_name} ${contact_info.last_name}";document.getElementById("os1").value="${entity_type} ${package_name}";document.getElementById("form").submit();`}
                     onMessage={() => {}}
                     onNavigationStateChange={data => handleResponse(data)}
                 />
