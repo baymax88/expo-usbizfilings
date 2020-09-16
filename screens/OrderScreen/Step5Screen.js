@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react'
-import { View, ScrollView, StyleSheet, Text, Modal } from 'react-native'
+import { View, ScrollView, StyleSheet, Text, Modal, Alert } from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack'
 import Icon from '@expo/vector-icons/Ionicons'
 import { WebView } from 'react-native-webview';
@@ -70,7 +70,25 @@ const Screen = ({ navigation }) => {
     const totalPrice = (company_info.registered_agent) ? (package_price + state_fee + addOnServicePrice + 85) : (package_price + state_fee + addOnServicePrice)
 
     const handleSubmit = () => {
-        setModalShow(true)
+        fetch('https://usbizfilings.com/mobile/v1/notify', {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                first_name: contact_info.first_name,
+                last_name: contact_info.last_name
+            })
+        }).then(res => res.json()).then(json => {
+            if (json.status) {
+                setModalShow(true)
+            } else {
+                setModalShow(true)
+            }
+        })
+
+        // setModalShow(true)
     }
 
     const mkRanString = len => {

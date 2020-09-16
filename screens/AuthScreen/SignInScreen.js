@@ -81,7 +81,7 @@ const SignInScreen = ({ navigation }) => {
                         </HelperText>
                         <View style={styles.button}>
                             <Button mode="contained" uppercase={false} style={styles.signIn} onPress={onSubmit}>Sign In</Button>
-                            <Button mode="outlined" uppercase={false} style={[styles.signIn, {borderColor: '#00438b', borderWidth: 2}]} onPress={() => {navigation.push('Signup')}}>Sign Up</Button>
+                            <Button mode="text" uppercase={false} style={styles.signIn} onPress={() => {navigation.push('Signup')}}>Go to Sign Up</Button>
                             <View style={{marginVertical: wp('2%'), justifyContent: 'center', alignItems: 'center', alignSelf: 'center'}}>
                                 <Text style={{fontSize: 10, color: '#000'}}>Copyrights &copy; 2020. All rights reserved by USBizFilings&reg;</Text>
                             </View>

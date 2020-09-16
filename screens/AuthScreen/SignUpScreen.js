@@ -101,20 +101,20 @@ const SignUpScreen = ({ navigation }) => {
                                     <TextInput
                                         label="Password"
                                         style={styles.input}
-                                        // secureTextEntry={hidePassword}
+                                        secureTextEntry={hidePassword}
                                         autoCorrect={false}
                                         onChangeText={text => setPassword(text)}
                                         value={password}
                                     />
-                                    {/* <Icon name={hidePassword ? 'eye-outline' : 'eye-off-outline'} size={wp('6%')} color="#00438b" style={{backgroundColor: '#fff', paddingTop: wp('3%')}} onPress={() => setHidePassword(!hidePassword)} /> */}
+                                    <Icon name={hidePassword ? 'eye-outline' : 'eye-off-outline'} size={wp('6%')} color="#00438b" style={{backgroundColor: '#fff', paddingTop: wp('3%')}} onPress={() => setHidePassword(!hidePassword)} />
                                 </View>
                                 <HelperText type="error" visible={showErr} style={{marginTop: wp('1%')}}>
                                     {errMessage}
                                 </HelperText>
                             </Animatable.View>
                             <View style={styles.button}>
-                                <Button mode="contained" uppercase={false} style={styles.signIn} onPress={() => navigation.push('Signin')}>Sign In</Button>
-                                <Button mode="outlined" uppercase={false} style={[styles.signIn, {borderColor: '#00438b', borderWidth: 2}]} onPress={onSubmit}>Sign Up</Button>
+                                <Button mode="contained" uppercase={false} style={styles.signIn} onPress={onSubmit}>Sign Up</Button>
+                                <Button mode="text" uppercase={false} style={styles.signIn} onPress={() => navigation.push('Signin')}>Go to Sign In</Button>
                                 <View style={{marginVertical: wp('2%'), justifyContent: 'center', alignItems: 'center', alignSelf: 'center'}}>
                                     <Text style={{fontSize: 10, color: '#000'}}>Copyrights &copy; 2020. All rights reserved by USBizFilings&reg;</Text>
                                 </View>
