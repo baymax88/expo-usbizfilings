@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { View, Text, ScrollView, StyleSheet, ImageBackground, StatusBar, ActivityIndicator, Alert } from 'react-native'
+import { View, Text, ScrollView, StyleSheet, ImageBackground, StatusBar, ActivityIndicator, Alert, Image } from 'react-native'
+import { Asset } from 'expo-asset'
 import { createStackNavigator } from '@react-navigation/stack'
 import Icon from '@expo/vector-icons/Ionicons'
 import { Title, TextInput, Caption, Button, HelperText } from 'react-native-paper'
@@ -9,13 +10,38 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 
 const ContactStack = createStackNavigator()
 
+const cacheImages = images => {
+  return images.map(image => {
+    if (typeof image === 'string') {
+      return Image.prefetch(image)
+    } else {
+      return Asset.fromModule(image).downloadAsync()
+    }
+  })
+}
+
 const ContactScreen = ({ navigation }) => {
+  const [isReady, setIsReady] = useState(false)
   let [fontsLoaded] = useFonts({
     Comfortaa_700Bold
   });
 
-  if (!fontsLoaded) {
-    return <AppLoading />
+  const _loadAssetsAsync = async () => {
+    const imageAssets = cacheImages([
+      require('../../assets/images/bg/contact.jpg')
+    ])
+
+    await Promise.all([...imageAssets])
+  }
+
+  if (!fontsLoaded || !isReady) {
+    return (
+      <AppLoading
+        startAsync={_loadAssetsAsync}
+        onFinish={() => setIsReady(true)}
+        onError={console.warn}
+      />
+    )
   }
 
   return (

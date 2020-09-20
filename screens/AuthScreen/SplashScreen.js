@@ -22,7 +22,7 @@ const SplashScreen = ({ navigation }) => {
                 </View>
                 <Animatable.View style={styles.footer} animation="fadeInUpBig">
                     <View>
-                        <Text style={styles.title}>Stay connected with everyone!</Text>
+                        <Text style={styles.title}>Form your LLC, Incorporation, or Not-for-Profit in Minutes!</Text>
                         <Text style={styles.text}>Sign in with account</Text>
                     </View>
                     <View style={styles.button}>
@@ -67,8 +67,9 @@ const styles = StyleSheet.create({
     },
     title: {
         color: '#05375a',
-        fontSize: 30,
-        fontWeight: 'bold'
+        fontSize: 20,
+        fontWeight: 'bold',
+        lineHeight: 30
     },
     text: {
         color: 'grey',

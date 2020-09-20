@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, ScrollView, ImageBackground, StatusBar } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, ImageBackground, StatusBar, Image } from 'react-native';
+import { Asset } from 'expo-asset'
 import { createStackNavigator } from '@react-navigation/stack';
 import Icon from '@expo/vector-icons/Ionicons'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -10,13 +11,39 @@ import { Button } from 'react-native-paper'
 
 const HomeStack = createStackNavigator();
 
+const cacheImages = images => {
+  return images.map(image => {
+    if (typeof image === 'string') {
+      return Image.prefetch(image)
+    } else {
+      return Asset.fromModule(image).downloadAsync()
+    }
+  })
+}
+
 const HomeScreen = ({ navigation }) => {
+  const [isReady, setIsReady] = useState(false)
   let [fontsLoaded] = useFonts({
     Comfortaa_700Bold
   });
 
-  if (!fontsLoaded) {
-    return <AppLoading />
+  const _loadAssetsAsync = async () => {
+    const imageAssets = cacheImages([
+      require('../../assets/images/bg/bg-2-2.jpg'),
+      require('../../assets/images/bg/bg-4-2.jpg')
+    ])
+
+    await Promise.all([...imageAssets])
+  }
+
+  if (!isReady || !fontsLoaded) {
+    return (
+      <AppLoading
+        startAsync={_loadAssetsAsync}
+        onFinish={() => setIsReady(true)}
+        onError={console.warn}
+      />
+    )
   }
 
   return (
@@ -62,7 +89,7 @@ const Screen = ({ navigation }) => (
           The company is headquartered in Detroit, Michigan.
         </Text>
 
-        <View style={{marginTop: 20, alignItems: 'center', flexDirection: 'row', justifyContent: 'space-around'}}>
+        {/* <View style={{marginTop: 20, alignItems: 'center', flexDirection: 'row', justifyContent: 'space-around'}}>
 
           <View style={{alignItems: 'center'}}>
             <AntIcon name="like" style={{color: '#b17cc6'}}></AntIcon>
@@ -74,7 +101,7 @@ const Screen = ({ navigation }) => (
             <Text style={{fontSize: 16, color: '#f70'}}>2150 Active Users</Text>
           </View>
 
-        </View>
+        </View> */}
 
       </View>
     </View>

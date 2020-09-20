@@ -28,7 +28,7 @@ const CancelScreen = ({ navigation }) => {
 const Screen = () => {
     return (
         <ScrollView style={{paddingHorizontal: wp('5%'), marginVertical: 10}}>
-            <Title style={styles.title}>Transaction is canceled.</Title>
+            <Title style={styles.title}>Your transaction is canceled.</Title>
         </ScrollView>
     )
 }
