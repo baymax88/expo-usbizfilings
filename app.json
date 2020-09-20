@@ -19,7 +19,7 @@
     },
     "android": {
       "package": "com.usbizfilings.usbizfilings",
-      "versionCode": 3
+      "versionCode": 5
     }
   }
 }

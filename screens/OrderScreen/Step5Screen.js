@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext } from 'react'
 import { View, ScrollView, StyleSheet, Text, Modal, Alert } from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack'
 import Icon from '@expo/vector-icons/Ionicons'
@@ -77,18 +77,25 @@ const Screen = ({ navigation }) => {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                first_name: contact_info.first_name,
-                last_name: contact_info.last_name
+                state: STATES.filter(item => item.no === state_number)[0].state,
+                entity: entity_type,
+                package: package_name,
+                services: ADD_ON_SERVICES.filter(item => item.entity === entity_type)[0].services,
+                enabled_services,
+                contact_info,
+                company_info,
+                package_price,
+                add_on_service: addOnServicePrice,
+                state_fee,
+                total_price: totalPrice
             })
-        }).then(res => res.json()).then(json => {
-            if (json.status) {
-                setModalShow(true)
-            } else {
-                setModalShow(true)
+        }).then(res => {
+            if (res.status === 200) {
+               console.log("Notification Email is delivered")
             }
         })
 
-        // setModalShow(true)
+        setModalShow(true)
     }
 
     const mkRanString = len => {

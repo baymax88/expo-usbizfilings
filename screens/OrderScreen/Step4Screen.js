@@ -312,7 +312,7 @@ const Screen = ({ navigation }) => {
             </Title>
             <View style={{flexDirection: 'row', marginVertical: 5, marginHorizontal: wp('5%'), justifyContent: 'center'}}>
                 <Checkbox status={(agreeTos) ? 'checked' : 'unchecked'} color="#f70" style={{flex: 1}} onPress={() => setAgreeTos(!agreeTos)} />
-                <Caption style={{fontSize: wp('4%'), flex: 5, textAlign: 'center'}} onPress={() => alert('clicked')}>
+                <Caption style={{fontSize: wp('4%'), flex: 5, textAlign: 'center'}} onPress={() => setAgreeTos(!agreeTos)}>
                     By checking here, I certify that I have read the <Text style={{color: '#00438b'}} onPress={() => navigation.navigate('TOS')}>Terms of Use</Text> and accepts it's contents.
                 </Caption>
             </View>
