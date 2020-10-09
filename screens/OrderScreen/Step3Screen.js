@@ -316,11 +316,18 @@ const Screen = ({ navigation }) => {
                 />
                 <HelperText type="error" visible={errEmail}>You must enter valid Email.</HelperText>
                 <View style={{alignItems: 'center', justifyContent: 'center'}}>
-                    <View style={{flexDirection: 'row', marginVertical: 5, justifyContent: 'center', marginHorizontal: wp('5%')}}>
-                        <Checkbox status={contactInfo.email_primary_communication ? 'checked' : 'unchecked'} color="#f70" onPress={() => setContactInfo({
-                            ...contactInfo,
-                            email_primary_communication: !contactInfo.email_primary_communication
-                            })} style={{flex: 1}} />
+                    <View style={{flexDirection: 'row', alignItems: 'center', marginVertical: 5, justifyContent: 'center', marginHorizontal: wp('5%')}}>
+                        {contactInfo.email_primary_communication ? (
+                            <Icon name="md-checkbox-outline" color="#f70" size={wp('6%')} onPress={() => setContactInfo({
+                                ...contactInfo,
+                                email_primary_communication: false
+                            })} style={{marginLeft: wp('4%')}} />
+                        ) : (
+                            <Icon name="ios-square-outline" color="#707070" size={wp('7%')} onPress={() => setContactInfo({
+                                ...contactInfo,
+                                email_primary_communication: true
+                            })} style={{marginLeft: wp('4%')}} />
+                        )}
                         <Caption style={{fontSize: wp('4%'), flex: 5, textAlign: 'center'}}>Use email as primary means of communication.</Caption>
                     </View>
                 </View>
@@ -503,17 +510,25 @@ const Screen = ({ navigation }) => {
                 <View style={{alignItems: 'center'}}>
                     <Title>Registered Agent</Title>
                     <View style={{flexDirection: 'row', marginVertical: 5, marginHorizontal: wp('5%'), justifyContent: 'center'}}>
-                        <Checkbox status={companyInfo.registered_agent ? 'unchecked' : 'checked'} color="#f70" onPress={() => setCompanyInfo({
-                            ...companyInfo,
-                            registered_agent: false
-                        })} style={{flex: 1}} />
+                        {companyInfo.registered_agent ? (
+                            <Icon name="ios-square-outline" color="#707070" size={wp('7%')} onPress={() => setCompanyInfo({
+                                ...companyInfo,
+                                registered_agent: false
+                            })} style={{marginHorizontal: wp('4%')}} />
+                        ) : (
+                            <Icon name="md-checkbox-outline" color="#f70" size={wp('6%')} style={{marginHorizontal: wp('4%')}} />
+                        )}
                         <Caption style={{fontSize: wp('4%'), flex: 5, textAlign: 'center'}}>I choose to use my own name as a Registered Agent.</Caption>
                     </View>
                     <View style={{flexDirection: 'row', marginVertical: 5, marginHorizontal: wp('5%'), justifyContent: 'center'}}>
-                        <Checkbox status={companyInfo.registered_agent ? 'checked' : 'unchecked'} color="#f70" onPress={() => setCompanyInfo({
-                            ...companyInfo,
-                            registered_agent: true
-                        })} style={{flex: 1}} />
+                        {companyInfo.registered_agent ? (
+                            <Icon name="md-checkbox-outline" color="#f70" size={wp('6%')} style={{marginHorizontal: wp('4%')}} />
+                        ) : (
+                            <Icon name="ios-square-outline" color="#707070" size={wp('7%')} onPress={() => setCompanyInfo({
+                                ...companyInfo,
+                                registered_agent: true
+                            })} style={{marginHorizontal: wp('4%')}} />
+                        )}
                         <Caption style={{fontSize: wp('4%'), flex: 5, textAlign: 'center'}}>I designate USBizFilings&reg; service as a Registered Agent on behalf of the company fa a fee of $85 per year.</Caption>
                     </View>
                 </View>

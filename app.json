@@ -14,12 +14,12 @@
       "**/*"
     ],
     "ios": {
-      "bundleIdentifier": "com.usbizfilings.usbizfilings",
+      "bundleIdentifier": "com.usbizfilings.usbizfilingsapp",
       "buildNumber": "1.0.0"
     },
     "android": {
       "package": "com.usbizfilings.usbizfilings",
-      "versionCode": 5
+      "versionCode": 6
     }
   }
 }

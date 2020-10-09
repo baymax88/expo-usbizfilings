@@ -27,7 +27,7 @@ const SplashScreen = ({ navigation }) => {
                     </View>
                     <View style={styles.button}>
                         <Button icon="arrow-right" mode="flex" uppercase={false} style={styles.start} onPress={() => navigation.navigate('Signin')}>Get Started</Button>
-                        <Button icon="arrow-right" mode="flex" uppercase={false} style={styles.startGuest} onPress={handleGuestStart}>Get Started As a Gutest</Button>
+                        <Button icon="arrow-right" mode="flex" uppercase={false} style={styles.startGuest} onPress={handleGuestStart}>Get Started As a Guest</Button>
                         <View style={{marginVertical: wp('2%'), justifyContent: 'center', alignItems: 'center', alignSelf: 'center'}}>
                             <Text style={{fontSize: 10, color: 'grey'}}>Copyrights &copy; 2020. All rights reserved by USBizFilings&reg;</Text>
                         </View>

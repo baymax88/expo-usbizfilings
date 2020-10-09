@@ -111,7 +111,7 @@ const Screen = ({ navigation }) => {
                         </Title>
                         <View style={{flex: 1, paddingLeft: wp('2%'), alignItems: 'flex-start'}}>
                             {(item[package_name] === 'unchecked' && !enabled_services.includes(item.no)) ? null : (
-                                <Checkbox status="checked" color="#28a745" />
+                                <Icon name="md-checkbox-outline" color="#28a745" size={wp('6%')} style={{marginLeft: wp('5%')}} />
                             )}
                         </View>
                     </View>
@@ -311,7 +311,11 @@ const Screen = ({ navigation }) => {
                 Terms Of Use
             </Title>
             <View style={{flexDirection: 'row', marginVertical: 5, marginHorizontal: wp('5%'), justifyContent: 'center'}}>
-                <Checkbox status={(agreeTos) ? 'checked' : 'unchecked'} color="#f70" style={{flex: 1}} onPress={() => setAgreeTos(!agreeTos)} />
+                {agreeTos ? (
+                    <Icon name="md-checkbox-outline" color="#f70" size={wp('6%')} style={{flex: 1, marginLeft: wp('4%')}} onPress={() => setAgreeTos(false)} />
+                ) : (
+                    <Icon name="ios-square-outline" color="#707070" size={wp('7%')} onPress={() => setAgreeTos(true)} style={{flex: 1, marginLeft: wp('4%')}} />
+                )}
                 <Caption style={{fontSize: wp('4%'), flex: 5, textAlign: 'center'}} onPress={() => setAgreeTos(!agreeTos)}>
                     By checking here, I certify that I have read the <Text style={{color: '#00438b'}} onPress={() => navigation.navigate('TOS')}>Terms of Use</Text> and accepts it's contents.
                 </Caption>

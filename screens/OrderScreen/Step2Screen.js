@@ -111,12 +111,16 @@ const Screen = ({ navigation }) => {
                         </Title>
                         <View style={{flex: 1, paddingLeft: wp('2%'), alignItems: 'flex-start'}}>
                             {(item[pkg] === 'unchecked') ? (
-                                <View style={{flexDirection: 'row'}}>
-                                    <Checkbox status={(enabledServices.includes(item.no)) ? 'checked' : 'unchecked'} color="#28a745" onPress={() => handleServices(item.no)} />
-                                    <Title style={{fontSize: wp('4%')}}>${item.price.toLocaleString()}</Title>
+                                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                                    {!enabledServices.includes(item.no) ? (
+                                        <Icon name="ios-square-outline" color="#707070" size={wp('7%')} onPress={() => handleServices(item.no)} />
+                                    ) : (
+                                        <Icon name="md-checkbox-outline" color="#28a745" size={wp('6%')} onPress={() => handleServices(item.no)} />
+                                    )}
+                                    <Title style={{marginLeft: wp('2%'), fontSize: wp('4%')}}>${item.price.toLocaleString()}</Title>
                                 </View>
                             ) : (
-                                <Checkbox status="checked" color="#28a745" />
+                                <Icon name="md-checkbox-outline" color="#28a745" size={wp('6%')} />
                             )}
                         </View>
                     </View>
