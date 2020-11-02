@@ -1,34 +1,32 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, StatusBar, ScrollView, ActivityIndicator } from 'react-native'
 import { HelperText, Button, TextInput } from 'react-native-paper'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen'
 import * as Animatable from 'react-native-animatable'
 import Icon from '@expo/vector-icons/MaterialCommunityIcons'
-import { AppContext } from '../../contexts/AppContext';
 
-const SignInScreen = ({ navigation }) => {
-    const { setCustomer, setLoginStatus } = useContext(AppContext);
+const ResetPasswordScreen = ({ navigation }) => {
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [hidePassword, setHidePassword] = useState(true);
     const [showErr, setShowErr] = useState(false);
     const [errMessage, setErrMessage] = useState('');
+    const [showSuccess, setShowSuccess] = useState(false);
+    const [successMessage, setSuccessMessage] = useState('');
     const [isReady, setIsReady] = useState(true)
 
     const onSubmit = async () => {
         await setIsReady(false);
-        await fetch('https://usbizfilings.com/mobile/v1/login', {
+        await fetch('https://usbizfilings.com/mobile/v1/get_reset_link', {
             method: "POST",
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ email, password })
+            body: JSON.stringify({ email })
         }).then(res => res.json()).then(json => {
             if (json.status) {
                 setIsReady(true);
-                setCustomer({first_name: json.firstname, last_name: json.lastname, email: json.email});
-                setLoginStatus(true);
+                setSuccessMessage(json.status_message);
+                setShowSuccess(true);
             } else {
                 setIsReady(true);
                 setErrMessage(json.status_message);
@@ -37,7 +35,14 @@ const SignInScreen = ({ navigation }) => {
         });
     }
 
-    const goToResetScreen = () => navigation.push('ResetPassword')
+    const goToSignInScreen = () => navigation.push('Signin')
+
+    useEffect(() => {
+        setShowErr(false);
+        setErrMessage('');
+        setShowSuccess(false);
+        setSuccessMessage('');
+    }, [])
 
     return (
         <>
@@ -46,7 +51,7 @@ const SignInScreen = ({ navigation }) => {
                 <View style={styles.container}>
                     <StatusBar barStyle="light-content" />
                     <View style={styles.header}>
-                        <Text style={styles.text_header}>Welcome!</Text>
+                        <Text style={styles.text_header}>Reset your password</Text>
                     </View>
                     <Animatable.View style={styles.footer}>
                         <Animatable.View animation="bounceIn">
@@ -63,30 +68,16 @@ const SignInScreen = ({ navigation }) => {
                                     }}
                                 />
                             </View>
-                            <View style={styles.inputContainer}>
-                                <Icon name="shield-key-outline" size={wp('6%')} color="#00438b" style={styles.inputIcon} />
-                                <TextInput
-                                    label="Password"
-                                    style={styles.input}
-                                    secureTextEntry={hidePassword}
-                                    value={password}
-                                    onChangeText={text => {
-                                        setPassword(text);
-                                        setShowErr(false);
-                                    }}
-                                />
-                                <Icon name={hidePassword ? 'eye-outline' : 'eye-off-outline'} size={wp('6%')} color="#00438b" style={{backgroundColor: '#fff', paddingTop: wp('3%')}} onPress={() => setHidePassword(!hidePassword)} />
-                            </View>
                         </Animatable.View>
                         <HelperText type="error" visible={showErr} style={{marginTop: wp('1%')}}>
                             {errMessage}
                         </HelperText>
-                        <View>
-                            <Button mode="text" uppercase={false} labelStyle={styles.forgotPwdBtn} onPress={goToResetScreen}>Forgot your password?</Button>
-                        </View>
+                        <HelperText type="info" visible={showSuccess} style={{marginTop: wp('1%')}}>
+                            {successMessage}
+                        </HelperText>
                         <View style={styles.button}>
-                            <Button mode="contained" uppercase={false} style={styles.signIn} onPress={onSubmit}>Sign In</Button>
-                            <Button mode="text" uppercase={false} style={styles.signIn} onPress={() => {navigation.push('Signup')}}>Go to Sign Up</Button>
+                            <Button mode="contained" uppercase={false} style={styles.signIn} onPress={onSubmit}>Get reset link</Button>
+                            <Button mode="text" uppercase={false} style={styles.signIn} onPress={goToSignInScreen}>Go to sign in</Button>
                             <View style={{marginVertical: wp('2%'), justifyContent: 'center', alignItems: 'center', alignSelf: 'center'}}>
                                 <Text style={{fontSize: 10, color: '#000'}}>Copyrights &copy; 2020. All rights reserved by USBizFilings&reg;</Text>
                             </View>
@@ -101,7 +92,7 @@ const SignInScreen = ({ navigation }) => {
     )
 }
 
-export default SignInScreen
+export default ResetPasswordScreen
 
 const styles = StyleSheet.create({
     container: {
@@ -116,7 +107,7 @@ const styles = StyleSheet.create({
         paddingBottom: wp('10%')
     },
     footer: {
-        flex: 2,
+        flex: 1,
         backgroundColor: '#fff',
         borderTopLeftRadius: wp('6%'),
         borderTopRightRadius: wp('6%'),
@@ -152,7 +143,7 @@ const styles = StyleSheet.create({
     },
     signIn: {
         marginVertical: wp('2%'),
-        width: wp('40%')
+        width: wp('60%')
     },
     forgotPwdBtn: {
         fontSize: 12
